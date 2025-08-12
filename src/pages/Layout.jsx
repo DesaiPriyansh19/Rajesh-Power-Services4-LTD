@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
-
+import { motion, AnimatePresence } from "framer-motion";
 const Layout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [mobileSidebar, setMobileSidebar] = useState(false);
@@ -24,22 +24,43 @@ const Layout = () => {
           <Sidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
         </div>
 
-        {/* Sidebar for mobile */}
-        {mobileSidebar && (
-          <div className="fixed inset-0 z-50 flex">
-            {/* Backdrop */}
-            <div
-              className="fixed inset-0 bg-black opacity-50"
-              onClick={() => setMobileSidebar(false)}
-            ></div>
+ {/* Sidebar for mobile */}
+<AnimatePresence>
+  {mobileSidebar && (
+    <motion.div
+      className="fixed inset-0 z-50 flex"
+      initial="hidden"
+      animate="visible"
+      exit="hidden"
+      variants={{
+        visible: { opacity: 1 },
+        hidden: { opacity: 0 },
+      }}
+      transition={{ duration: 0.3 }}
+    >
+      {/* Backdrop */}
+      <motion.div
+        className="fixed inset-0 bg-black"
+        onClick={() => setMobileSidebar(false)}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.5 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
+      />
 
-            {/* Sidebar Drawer */}
-            <div className="relative z-50 w-64 bg-white shadow-lg">
-              <Sidebar isOpen={true} setIsOpen={() => {}} />
-            </div>
-          </div>
-        )}
-
+      {/* Sidebar Drawer */}
+      <motion.div
+        className="relative z-50 w-64 bg-white shadow-lg"
+        initial={{ x: "-100%" }}
+        animate={{ x: 0 }}
+        exit={{ x: "-100%" }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      >
+        <Sidebar isOpen={true} setIsOpen={() => {}} />
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
         {/* Page content */}
         <main className="flex-1 pl-4 pt-4 pb-4 overflow-y-auto">
           <Outlet />
