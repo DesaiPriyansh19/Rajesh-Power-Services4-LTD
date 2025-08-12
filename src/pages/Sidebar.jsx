@@ -50,7 +50,7 @@ const menuItems = [
     name: "STORES",
     icon: <Package size={20} />,
     type: "link",
-    path: "/stores",
+    path: "/store",
   },
   {
     name: "GOODS ISSUE UPDATES",
@@ -62,7 +62,7 @@ const menuItems = [
     name: "Project",
     icon: <Folder size={20} />,
     type: "link",
-    path: "/project",
+    path: "/projects",
   },
   {
     name: "Reports",
@@ -71,19 +71,19 @@ const menuItems = [
     path: "/reports",
   },
   {
-    name: "User",
+    name: "Users",
     icon: <User size={20} />,
     type: "link",
-    path: "/user",
+    path: "/users",
   },
 ];
 
 
   return (
     <div
-      className={`bg-white border-r border-gray-200  box-shadow-1
+      className={`bg-white border-r border-gray-200  box-shadow-1 pb-10
         transition-[width] duration-500 ease-in-out 
-        overflow-hidden h-full flex flex-col 
+        overflow-y-auto h-full flex flex-col 
         ${isOpen ? "w-64" : "w-20"}`}
     >
       {/* Menu List */}
