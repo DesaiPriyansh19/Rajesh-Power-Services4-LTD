@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 
 export default function Dashboard() {
   const cards = [
-    { title: "TODAY’S DISPATCH CLEARANCE", value: 19, link: "/dispatch" },
-    { title: "TODAY’S DISPATCH CLEARANCE", value: 25, link: "/dispatch" },
-    { title: "TODAY’S DISPATCH CLEARANCE", value: 12, link: "/dispatch" },
-    { title: "TODAY’S DISPATCH CLEARANCE", value: 8, link: "/dispatch" },
+    { title: "TODAY’S DISPATCH CLEARANCE", value: 19, link: "/clearance1" },
+    { title: "TODAY’S DISPATCH CLEARANCE", value: 25, link: "/clearance1" },
+    { title: "TODAY’S DISPATCH CLEARANCE", value: 12, link: "/clearance1" },
+    { title: "TODAY’S DISPATCH CLEARANCE", value: 8, link: "/clearance1" },
   ];
 
   const returnStockData = [
@@ -38,13 +38,19 @@ export default function Dashboard() {
           >
             <h2 className="text-sm font-medium text-gray-700">{card.title}</h2>
             <div className="flex items-center justify-between mt-4">
-              <h2 className="text-3xl font-bold">{card.value}</h2>
-              <Link
-                to={card.link}
-                className="bg-black text-white rounded-full p-2 hover:bg-gray-800 transition"
-              >
-                <ArrowRight size={18} />
-              </Link>
+              <h2 className="text-3xl  font-bold">{card.value}</h2>
+          <Link
+  to={card.link}
+  className="group bg-black text-white rounded-full p-2 
+             hover:bg-gray-800 hover:shadow-lg 
+             transform hover:scale-110 transition-all duration-300 ease-in-out"
+>
+  <ArrowRight
+    size={18}
+    className="transition-transform duration-300 group-hover:translate-x-1"
+  />
+</Link>
+
             </div>
           </div>
         ))}
@@ -68,7 +74,7 @@ export default function Dashboard() {
                 {returnStockData.map((row, i) => (
                   <tr
                     key={i}
-                    className="hover:bg-gray-100 hover:shadow-md transition text-center "
+                    className="hover:bg-gray-100 hover:shadow-md hover:font-medium transition text-center "
                   >
                     <td className="py-2">{row.product}</td>
                     <td className="py-2">{row.qty}</td>
@@ -99,7 +105,7 @@ export default function Dashboard() {
                 {projectWiseData.map((row, i) => (
                   <tr
                     key={i}
-                    className="hover:bg-gray-100 hover:shadow-md  transition text-center "
+                    className="hover:bg-gray-100 hover:shadow-md hover:font-medium transition text-center "
                   >
                     <td className="py-2">{row.code}</td>
                     <td className="py-2">{row.store}</td>
