@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <Layout>
-      <h1 className="text-2xl font-bold">Welcome to home Dashboard</h1>
+      <h1 className="text-2xl font-bold">Welcomes to home Dashboard</h1>
     </Layout>
   );
 };
