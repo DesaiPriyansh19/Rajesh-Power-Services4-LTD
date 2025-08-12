@@ -65,7 +65,7 @@ export default function DispatchPage() {
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto rounded-md box-shadow-2 ">
+      <div className="overflow-x-auto rounded-md box-shadow-2 min-w-[700px]">
         <table className="min-w-full text-xs sm:text-sm">
           <thead className="sticky top-0 z-10">
             <tr>

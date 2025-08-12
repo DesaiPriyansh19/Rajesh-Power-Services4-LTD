@@ -6,6 +6,10 @@ import {
   Truck,
   ChevronRight,
   ChevronDown,
+  Package,
+  ClipboardList,
+  Folder,
+  BarChart,User
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import logo from "../public/logo.png";
@@ -17,27 +21,63 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     setOpenDropdown(openDropdown === name ? null : name);
   };
 
-  const menuItems = [
-    { name: "Dashboard", icon: <LayoutDashboard size={20} />, type: "link", path: "/home" },
-    {
-      name: "PO Updated",
-      icon: <FileText size={20} />,
-      type: "dropdown",
-      children: [
-        { name: "PO1", path: "/po1" },
-        { name: "PO 2", path: "/po2" },
-      ],
-    },
-    {
-      name: "Dispatch Clearance",
-      icon: <Truck size={20} />,
-      type: "dropdown",
-      children: [
-        { name: "Clearance 1", path: "/clearance1" },
-        { name: "Clearance 2", path: "/clearance2" },
-      ],
-    },
-  ];
+const menuItems = [ 
+  { 
+    name: "Dashboard", 
+    icon: <LayoutDashboard size={20} />, 
+    type: "link", 
+    path: "/home" 
+  },
+  {
+    name: "PO Updated",
+    icon: <FileText size={20} />,
+    type: "dropdown",
+    children: [
+      { name: "PO 1", path: "/po1" },
+      { name: "PO 2", path: "/po2" },
+    ],
+  },
+  {
+    name: "Dispatch Clearance",
+    icon: <Truck size={20} />,
+    type: "dropdown",
+    children: [
+      { name: "Clearance 1", path: "/clearance1" },
+      { name: "Clearance 2", path: "/clearance2" },
+    ],
+  },
+  {
+    name: "STORES",
+    icon: <Package size={20} />,
+    type: "link",
+    path: "/stores",
+  },
+  {
+    name: "GOODS ISSUE UPDATES",
+    icon: <ClipboardList size={20} />,
+    type: "link",
+    path: "/goods-issue-updates",
+  },
+  {
+    name: "Project",
+    icon: <Folder size={20} />,
+    type: "link",
+    path: "/project",
+  },
+  {
+    name: "Reports",
+    icon: <BarChart size={20} />,
+    type: "link",
+    path: "/reports",
+  },
+  {
+    name: "User",
+    icon: <User size={20} />,
+    type: "link",
+    path: "/user",
+  },
+];
+
 
   return (
     <div

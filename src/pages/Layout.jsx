@@ -11,9 +11,10 @@ const Layout = () => {
     <div className="flex flex-col h-screen">
       {/* Header on top, full width */}
       <Header
-        onMobileMenuClick={() => setMobileSidebar(true)}
-        sidebarOpen={sidebarOpen}
-        setSidebarOpen={setSidebarOpen}
+       sidebarOpen={sidebarOpen}
+  setSidebarOpen={setSidebarOpen}
+  mobileSidebar={mobileSidebar}
+  setMobileSidebar={setMobileSidebar}
       />
 
       {/* Main content area */}

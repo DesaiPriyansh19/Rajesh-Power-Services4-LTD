@@ -3,7 +3,7 @@ import { Bell, Menu, X  } from "lucide-react";
 import logo from "../public/logo.png";
 import defaultProfile from "../public/profile-logo-default.png";
 
-const Header = ({ sidebarOpen, setSidebarOpen }) => {
+const Header = ({ sidebarOpen, setSidebarOpen, mobileSidebar, setMobileSidebar }) => {
   return (
     <header className="w-full bg-white shadow-md px-4 py-3 mb-5 flex items-center justify-between">
       {/* Left side - Logo */}
@@ -27,19 +27,26 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
         <Bell size={22} className="text-gray-700 cursor-pointer" />
 
         {/* Toggle Menu (Mobile only) */}
-     
-
-        {/* Toggle Menu Button */}
+      {/* Toggle Menu for Large Devices */}
         <button
-          className="p-2 hover:bg-gray-100 rounded transition-colors duration-200"
+          className="hidden lg:block p-2 hover:bg-gray-100 rounded transition-colors duration-200"
           onClick={() => setSidebarOpen(!sidebarOpen)}
         >
           {sidebarOpen ? (
-            <X size={22} className="text-red-500" /> // Close icon when open
+            <X size={22} className="text-red-500" />
           ) : (
-            <Menu size={22} className="text-gray-700" /> // Menu icon when closed
+            <Menu size={22} className="text-gray-700" />
           )}
         </button>
+
+        {/* Toggle Menu for Small Devices */}
+        <button
+          className="block lg:hidden p-2 hover:bg-gray-100 rounded transition-colors duration-200"
+          onClick={() => setMobileSidebar(true)}
+        >
+          <Menu size={22} className="text-gray-700" />
+        </button>
+        
       </div>
     </header>
   );
