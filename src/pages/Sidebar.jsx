@@ -24,7 +24,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       icon: <FileText size={20} />,
       type: "dropdown",
       children: [
-        { name: "POPriyansh 1", path: "/po1" },
+        { name: "PO1", path: "/po1" },
         { name: "PO 2", path: "/po2" },
       ],
     },
@@ -41,7 +41,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
   return (
     <div
-      className={`bg-white border-r border-gray-200 
+      className={`bg-white border-r border-gray-200  box-shadow-1
         transition-[width] duration-500 ease-in-out 
         overflow-hidden h-full flex flex-col 
         ${isOpen ? "w-64" : "w-20"}`}

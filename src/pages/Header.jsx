@@ -8,7 +8,7 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
     <header className="w-full bg-white shadow-md px-4 py-3 mb-5 flex items-center justify-between">
       {/* Left side - Logo */}
       <div className="flex items-center gap-4">
-        <img src={logo} alt="Logo" className="h-10" />
+        <img src={logo} alt="Logo" className="h-11 xl:h-12" />
       </div>
 
       {/* Right side */}

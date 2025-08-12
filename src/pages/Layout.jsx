@@ -40,7 +40,7 @@ const Layout = () => {
         )}
 
         {/* Page content */}
-        <main className="flex-1 p-4  overflow-y-auto">
+        <main className="flex-1 pl-4 pt-4 pb-4 overflow-y-auto">
           <Outlet />
         </main>
       </div>

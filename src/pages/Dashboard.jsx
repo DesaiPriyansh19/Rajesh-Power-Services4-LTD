@@ -59,7 +59,7 @@ export default function Dashboard() {
       {/* --- SECOND SECTION: Two Tables --- */}
       <div className="flex flex-col lg:flex-row gap-6">
         {/* LEFT TABLE: 30% */}
-        <div className="lg:w-[30%] border border-black rounded-lg bg-white p-5 shadow-sm">
+        <div className="lg:w-[30%] border border-black rounded-lg bg-white p-4 shadow-sm">
           <h2 className="text-lg font-semibold mb-4">RETURN STOCK</h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
