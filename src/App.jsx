@@ -7,12 +7,15 @@ import Layout from "./pages/Layout";
 import Dashboard from "./pages/Dashboard";
 import POPage from "./pages/POPage";
 import DispatchPage from "./pages/DispatchPage";
-import StorePage from "./pages/StorePage";
+import StorePage from "./pages/stores/StorePage";
 import GoodsIssueUpdates from "./pages/GoodsIssueUpdates";
 import ProjectsPage from "./pages/ProjectsPage";
 import Reports from "./pages/Reports";
 import UsersPage from "./pages/UsersPage";
 import AnimatedPage from "./pages/AnimatedPage";
+import StoreHoldingsPage from "./pages/stores/StoreHoldingsPage";
+import StoreDCPage from "./pages/stores/StoreDCPage";
+import StoreManagerPage from "./pages/stores/StoreManagerPage";
 
 // Create a wrapper component that uses location to support AnimatePresence
 function AnimatedRoutes() {
@@ -78,6 +81,30 @@ function AnimatedRoutes() {
             element={
               <AnimatedPage>
                 <StorePage />
+              </AnimatedPage>
+            }
+          />
+             <Route
+            path="/store-holdings"
+            element={
+              <AnimatedPage>
+                <StoreHoldingsPage/>
+              </AnimatedPage>
+            }
+          />
+               <Route
+            path="/store-dc"
+            element={
+              <AnimatedPage>
+                <StoreDCPage/>
+              </AnimatedPage>
+            }
+          />
+                 <Route
+            path="/store-manager"
+            element={
+              <AnimatedPage>
+                <StoreManagerPage/>
               </AnimatedPage>
             }
           />

@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
-  Menu,
   LayoutDashboard,
   FileText,
   Truck,
@@ -9,28 +8,45 @@ import {
   Package,
   ClipboardList,
   Folder,
-  BarChart,User
+  BarChart,
+  User
 } from "lucide-react";
-import { Link } from "react-router-dom";
-import logo from "../public/logo.png";
+import { Link, useLocation } from "react-router-dom";
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
-  const [openDropdown, setOpenDropdown] = useState(null);
+  const location = useLocation();
+  const scrollRef = useRef(null);
 
-  const toggleDropdown = (name) => {
-    setOpenDropdown(openDropdown === name ? null : name);
+  // Load persisted dropdown and scroll position
+  const [openDropdown, setOpenDropdown] = useState(
+    () => localStorage.getItem("sidebarOpenDropdown") || null
+  );
+
+  useEffect(() => {
+    const savedScroll = localStorage.getItem("sidebarScroll");
+    if (scrollRef.current && savedScroll) {
+      scrollRef.current.scrollTop = parseInt(savedScroll, 10);
+    }
+  }, []);
+
+  // Persist scroll position on change
+  const handleScroll = () => {
+    if (scrollRef.current) {
+      localStorage.setItem("sidebarScroll", scrollRef.current.scrollTop);
+    }
   };
 
-const menuItems = [ 
-  { 
-    name: "Dashboard", 
-    icon: <LayoutDashboard size={20} />, 
-    type: "link", 
-    path: "/home" 
-  },
+  const toggleDropdown = (name) => {
+    const newValue = openDropdown === name ? null : name;
+    setOpenDropdown(newValue);
+    localStorage.setItem("sidebarOpenDropdown", newValue || "");
+  };
+
+const menuItems = [
+  { name: "Dashboard", icon: LayoutDashboard, type: "link", path: "/home" },
   {
     name: "PO Updated",
-    icon: <FileText size={20} />,
+    icon: FileText,
     type: "dropdown",
     children: [
       { name: "PO 1", path: "/po1" },
@@ -39,7 +55,7 @@ const menuItems = [
   },
   {
     name: "Dispatch Clearance",
-    icon: <Truck size={20} />,
+    icon: Truck,
     type: "dropdown",
     children: [
       { name: "Clearance 1", path: "/clearance1" },
@@ -48,98 +64,97 @@ const menuItems = [
   },
   {
     name: "STORES",
-    icon: <Package size={20} />,
-    type: "link",
-    path: "/store",
+    icon: Package,
+    type: "dropdown",
+    children:[
+      { name:"Store", path:"/store" },
+      { name:"Store Holdings", path:"/store-holdings" },
+      { name:"Store DC", path:"/store-dc" },
+      { name:"Store Manager", path:"/store-manager" },
+    ],
   },
-  {
-    name: "GOODS ISSUE UPDATES",
-    icon: <ClipboardList size={20} />,
-    type: "link",
-    path: "/goods-issue-updates",
-  },
-  {
-    name: "Project",
-    icon: <Folder size={20} />,
-    type: "link",
-    path: "/projects",
-  },
-  {
-    name: "Reports",
-    icon: <BarChart size={20} />,
-    type: "link",
-    path: "/reports",
-  },
-  {
-    name: "Users",
-    icon: <User size={20} />,
-    type: "link",
-    path: "/users",
-  },
+  { name: "GOODS ISSUE UPDATES", icon: ClipboardList, type: "link", path: "/goods-issue-updates" },
+  { name: "Project", icon: Folder, type: "link", path: "/projects" },
+  { name: "Reports", icon: BarChart, type: "link", path: "/reports" },
+  { name: "Users", icon: User, type: "link", path: "/users" },
 ];
 
 
   return (
     <div
-      className={`bg-white border-r border-gray-200  box-shadow-1 pb-10
+      ref={scrollRef}
+      onScroll={handleScroll}
+      className={`bg-white border-r border-gray-200 box-shadow-1 pb-10
         transition-[width] duration-500 ease-in-out 
         overflow-y-auto h-full flex flex-col 
         ${isOpen ? "w-64" : "w-20"}`}
     >
-      {/* Menu List */}
       <ul className="mt-0 pt-8 space-y-2 relative flex-1">
         {menuItems.map((item, index) => (
           <li key={index} className="relative group">
             {/* Main Item */}
-          <Link to={item.path}>
-           <div
-              onClick={() =>
-                item.type === "dropdown" && isOpen
-                  ? toggleDropdown(item.name)
-                  : null
-              }
-              className="flex items-center justify-between px-4 py-2 cursor-pointer hover:bg-gray-100"
-            >
-              <div className="flex items-center gap-3">
-                {item.icon}
-                {/* Animated text */}
-                <span
-                  className={`transition-opacity duration-300 ${
-                    isOpen ? "opacity-100" : "opacity-0"
-                  }`}
-                >
-                  {item.type === "link" ? (
-                    <Link to={item.path}>{item.name}</Link>
-                  ) : (
-                    item.name
-                  )}
-                </span>
+         {item.type === "link" ? (
+  <Link to={item.path}>
+    <div
+      className={`flex items-center justify-between px-4 py-2 cursor-pointer hover:bg-gray-100 ${
+        location.pathname === item.path ? "bg-gray-200" : ""
+      }`}
+    >
+      <div className="flex items-center gap-3">
+        <item.icon size={isOpen ? 20 : 22} className="text-gray-700" />
+        {isOpen && (
+          <span className="transition-opacity duration-300 opacity-100">
+            {item.name}
+          </span>
+        )}
+        {!isOpen && (
+          <span className="hidden md:block absolute left-full top-1/2 -translate-y-1/2 ml-2 px-2 py-1 bg-black text-white text-sm rounded opacity-0 group-hover:opacity-100 whitespace-nowrap z-10">
+            {item.name}
+          </span>
+        )}
+      </div>
+    </div>
+  </Link>
+) : (
 
-                {/* Tooltip for collapsed view */}
-                {!isOpen && (
-                  <span className="hidden md:block absolute left-full top-1/2 -translate-y-1/2 ml-2 px-2 py-1 bg-black text-white text-sm rounded opacity-0 group-hover:opacity-100 whitespace-nowrap z-10">
-                    {item.name}
-                  </span>
-                )}
-              </div>
+            <div
+  onClick={() => isOpen && toggleDropdown(item.name)}
+  className="flex items-center justify-between px-4 py-2 cursor-pointer hover:bg-gray-100"
+>
+<div className="flex items-center gap-3">
+  <item.icon size={isOpen ? 20 : 28} className="text-gray-700" />
+  {isOpen && (
+    <span className="transition-opacity duration-300 opacity-100">
+      {item.name}
+    </span>
+  )}
+  {!isOpen && (
+    <span className="hidden md:block absolute left-full top-1/2 -translate-y-1/2 ml-2 px-2 py-1 bg-black text-white text-sm rounded opacity-0 group-hover:opacity-100 whitespace-nowrap z-10">
+      {item.name}
+    </span>
+  )}
+</div>
 
-              {/* Chevron animation */}
-              {item.type === "dropdown" && isOpen && (
-                <span
-                  className={`transform transition-transform duration-300 ${
-                    openDropdown === item.name ? "rotate-90" : ""
-                  }`}
-                >
-                  {openDropdown === item.name ? (
-                    <ChevronDown size={16} className="text-gray-600" />
-                  ) : (
-                    <ChevronRight size={16} className="text-gray-600" />
-                  )}
-                </span>
-              )}
-            </div></Link> 
 
-            {/* Dropdown children with fade+slide animation */}
+
+  {isOpen && (
+    <span
+      className={`transform transition-transform duration-300 ${
+        openDropdown === item.name ? "rotate-90" : ""
+      }`}
+    >
+      {openDropdown === item.name ? (
+        <ChevronDown size={16} className="text-gray-600" />
+      ) : (
+        <ChevronRight size={16} className="text-gray-600" />
+      )}
+    </span>
+  )}
+</div>
+
+            )}
+
+            {/* Dropdown children */}
             {item.type === "dropdown" && (
               <ul
                 className={`ml-10 space-y-1 overflow-hidden transition-all duration-300 ease-in-out ${
@@ -149,11 +164,15 @@ const menuItems = [
                 }`}
               >
                 {item.children.map((child, i) => (
-                  <li
-                    key={i}
-                    className="px-4 py-1 hover:bg-gray-100 cursor-pointer"
-                  >
-                    <Link to={child.path}>{child.name}</Link>
+                  <li key={i}>
+                    <Link
+                      to={child.path}
+                      className={`block px-4 py-1 hover:bg-gray-100 ${
+                        location.pathname === child.path ? "bg-gray-200" : ""
+                      }`}
+                    >
+                      {child.name}
+                    </Link>
                   </li>
                 ))}
               </ul>

@@ -33,9 +33,9 @@ const Header = ({ sidebarOpen, setSidebarOpen, mobileSidebar, setMobileSidebar }
           onClick={() => setSidebarOpen(!sidebarOpen)}
         >
           {sidebarOpen ? (
-            <X size={22} className="text-red-500" />
+            <X size={22} className="" />
           ) : (
-            <Menu size={22} className="text-gray-700" />
+            <Menu size={22} className="" />
           )}
         </button>
 
