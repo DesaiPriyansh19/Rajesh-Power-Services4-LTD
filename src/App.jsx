@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import React from "react";
+import react from "react";
 import { AnimatePresence } from "framer-motion";
 
 import Login from "./pages/Login";
@@ -109,7 +109,7 @@ function AnimatedRoutes() {
             path="/users"
             element={
               <AnimatedPage>
-                <UsersPage />
+                <UsersPage /> 
               </AnimatedPage>
             }
           />

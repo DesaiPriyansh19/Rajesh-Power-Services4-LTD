@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+import AddDispatchClearancePopup from "../popups/AddDispatchClearancePopup";
+import ManageDCPopup from "../popups/ManageDCPopup";
 
 export default function DispatchPage() {
+    const [openModal, setOpenModal] = useState(null);
   const dispatchData = [
     {
       projectCode: "PRJ-001",
@@ -54,14 +57,30 @@ export default function DispatchPage() {
       {/* Header */}
       <div className="flex flex-wrap justify-between items-center mb-4 gap-2">
         <h1 className="text-lg sm:text-2xl  ">DISPATCH CLEARANCE</h1>
-        <div className="flex gap-2 flex-wrap">
-          <button className="bg-[#005AAB] text-xs sm:text-sm text-white px-3 sm:px-4 py-2 rounded-md">
-            Add Dispatch Clearance
-          </button>
-          <button className="bg-[#242424] text-xs sm:text-sm text-white px-3 sm:px-4 py-2 rounded-md">
-            Manage DC by Store/Project
-          </button>
-        </div>
+      <div className="flex gap-2 flex-wrap">
+        <button
+          onClick={() => setOpenModal("add")}
+          className="bg-[#005AAB] text-xs sm:text-sm text-white px-3 sm:px-4 py-2 rounded-md"
+        >
+          Add Dispatch Clearance
+        </button>
+
+        <button
+          onClick={() => setOpenModal("manage")}
+          className="bg-[#242424] text-xs sm:text-sm text-white px-3 sm:px-4 py-2 rounded-md"
+        >
+          Manage DC by Store/Project
+        </button>
+      </div>
+
+      {/* Conditionally render the different popups */}
+      {openModal === "add" && (
+        <AddDispatchClearancePopup onClose={() => setOpenModal(null)} />
+      )}
+      {openModal === "manage" && (
+        <ManageDCPopup onClose={() => setOpenModal(null)} />
+      )}
+ 
       </div>
 
       {/* Table */}
@@ -108,6 +127,13 @@ export default function DispatchPage() {
           </tbody>
         </table>
       </div>
+       {/* Conditionally render the different popups */}
+      {openModal === "add" && (
+        <AddDispatchClearancePopup onClose={() => setOpenModal(null)} />
+      )}
+      {openModal === "manage" && (
+        <ManageDCPopup onClose={() => setOpenModal(null)} />
+      )}
     </div>
   );
 }
