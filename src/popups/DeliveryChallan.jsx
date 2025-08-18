@@ -2,6 +2,10 @@
 
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import logo from "../public/logo.png";
+
+
+
 
 export default function DeliveryChallan({ onClose }) {
   return (
@@ -31,7 +35,7 @@ export default function DeliveryChallan({ onClose }) {
       <div className="flex justify-center items-center border-black border-2 rounded-t-lg">
         <div className="w-[80%] flex gap-2 justify-center px-2 items-center border-black border-r-2 box-border">
           <div>
-            <img src="src/public/logo.png" className="p-2" />
+            <img src={logo} className="p-2" />
           </div>
           <div>
             <p className="text-sm font-bold">GSTIN NO: 24AAECR6294G1Z7</p>
