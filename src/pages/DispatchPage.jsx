@@ -73,13 +73,7 @@ export default function DispatchPage() {
         </button>
       </div>
 
-      {/* Conditionally render the different popups */}
-      {openModal === "add" && (
-        <AddDispatchClearancePopup onClose={() => setOpenModal(null)} />
-      )}
-      {openModal === "manage" && (
-        <ManageDCPopup onClose={() => setOpenModal(null)} />
-      )}
+  
  
       </div>
 

@@ -1,14 +1,16 @@
 import React, { useState } from "react";
+import { MoreVertical } from "lucide-react";
 
 export default function GoodsIssueUpdates() {
   const [store, setStore] = useState("");
   const [challanNo, setChallanNo] = useState("");
+  const [menuOpen, setMenuOpen] = useState(null);
 
   const goodsIssueData = [
     {
       challanNo: "CH-1001",
       deliveredTo: "Warehouse 1",
-      status: "Delivered",
+      status: "Approved",
       projectCode: "PRJ-001",
       storeId: "ST-101",
     },
@@ -22,7 +24,7 @@ export default function GoodsIssueUpdates() {
     {
       challanNo: "CH-1003",
       deliveredTo: "Warehouse 3",
-      status: "Delivered",
+      status: "Approved",
       projectCode: "PRJ-003",
       storeId: "ST-103",
     },
@@ -32,10 +34,14 @@ export default function GoodsIssueUpdates() {
     console.log("Search with:", { store, challanNo });
   };
 
+  const toggleMenu = (index) => {
+    setMenuOpen(menuOpen === index ? null : index);
+  };
+
   return (
-    <div className="p-6">
+    <div className="p-4 bg-white rounded-md box-shadow-1">
       {/* Heading */}
-      <h1 className="text-2xl font-bold mb-6">GOODS ISSUE UPDATES</h1>
+      <h1 className="text-2xl mb-6">GOODS ISSUE UPDATES</h1>
 
       {/* Search bar and button all in one line */}
       <div className="flex flex-wrap items-center gap-4 mb-6">
@@ -62,9 +68,9 @@ export default function GoodsIssueUpdates() {
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto bg-white shadow rounded">
+      <div className="overflow-x-auto bg-white box-shadow-2 rounded-xl">
         <table className="min-w-full border border-gray-200 text-sm">
-          <thead className="bg-gray-100">
+          <thead>
             <tr>
               <th className="p-3 border">Challan No.</th>
               <th className="p-3 border">Delivered To</th>
@@ -84,16 +90,48 @@ export default function GoodsIssueUpdates() {
               >
                 <td className="p-3 border">{row.challanNo}</td>
                 <td className="p-3 border">{row.deliveredTo}</td>
-                <td className="p-3 border font-semibold">{row.status}</td>
+        {/* ✅ Status column */}
+      <td className="p-3 border">
+        <span
+          className={`px-3 py-1 rounded-full text-sm  ${
+            row.status === "Pending"
+              ? "bg-[#FFDA8B] text-black"
+              : row.status === "Approved"
+              ? "bg-[#C7F4B2] text-black"
+              : "bg-gray-200 text-gray-700"
+          }`}
+        >
+          {row.status}
+        </span>
+      </td>
                 <td className="p-3 border">{row.projectCode}</td>
                 <td className="p-3 border">{row.storeId}</td>
-                <td className="p-3 border">
-                  <button className="bg-blue-500 text-white px-3 py-1 rounded mr-2">
-                    Edit
+                <td className="p-3 border relative">
+                  {/* Three Dots Button */}
+                  <button
+                    onClick={() => toggleMenu(i)}
+                    className="p-1 rounded hover:bg-gray-200"
+                  >
+                    <MoreVertical size={18} />
                   </button>
-                  <button className="bg-red-500 text-white px-3 py-1 rounded">
-                    Delete
-                  </button>
+
+                  {/* Dropdown */}
+                  {menuOpen === i && (
+                    <div className="absolute right-4 mt-2 w-28 bg-white border rounded shadow-md z-10">
+                      <button
+                        onClick={() => alert(`Edit ${row.challanNo}`)}
+                        className="block w-full text-left px-3 py-2 hover:bg-gray-100"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => alert(`Delete ${row.challanNo}`)}
+                        className="block w-full text-left px-3 py-2 hover:bg-gray-100 text-red-500"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  )}
                 </td>
               </tr>
             ))}

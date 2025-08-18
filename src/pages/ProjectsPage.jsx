@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import CreateNewProject from "../popups/CreateNewProject";
+import ManageProject from "../popups/ManageProject";
 
 export default function ProjectsPage() {
   const [projectCode, setProjectCode] = useState("");
   const [associatedCompany, setAssociatedCompany] = useState("");
-
+    const [openModal, setOpenModal] = useState(null);
   const projectsData = [
     {
       projectCode: "PRJ-001",
@@ -35,7 +37,7 @@ export default function ProjectsPage() {
   return (
     <div className="p-4 bg-white rounded-md box-shadow-1">
       {/* Heading */}
-      <h1 className="text-2xl font-bold mb-6">PROJECTS</h1>
+      <h1 className="text-2xl  mb-6">PROJECTS</h1>
 
       {/* Search inputs + Search + Action buttons all in one line */}
       <div className="flex flex-wrap items-center gap-4 mb-6">
@@ -60,10 +62,12 @@ export default function ProjectsPage() {
           Search
         </button>
 
-        <button className="bg-[#005AAB] text-white px-4 py-2 rounded hover:opacity-90 whitespace-nowrap ml-auto">
+        <button className="bg-gray-800 text-white px-4 py-2 rounded hover:opacity-90 whitespace-nowrap ml-auto"
+        onClick={() => setOpenModal("create")}>
           Create New Project
         </button>
-        <button className="bg-gray-800 text-white px-4 py-2 rounded hover:opacity-90 whitespace-nowrap">
+        <button className="bg-gray-800 text-white px-4 py-2 rounded hover:opacity-90 whitespace-nowrap"
+        onClick={() => setOpenModal("manage")}>
           Manage Project
         </button>
       </div>
@@ -114,6 +118,13 @@ export default function ProjectsPage() {
             ))}
           </tbody>
         </table>
+             {/* Conditionally render the different popups */}
+              {openModal === "create" && (
+                <CreateNewProject onClose={() => setOpenModal(null)} />
+              )}
+              {openModal === "manage" && (
+                <ManageProject onClose={() => setOpenModal(null)} />
+              )}
       </div>
     </div>
   );

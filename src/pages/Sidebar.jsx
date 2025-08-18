@@ -45,23 +45,24 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 const menuItems = [
   { name: "Dashboard", icon: LayoutDashboard, type: "link", path: "/home" },
   {
-    name: "PO Updated",
+    name: "PO & Dispatch Clearance",
     icon: FileText,
     type: "dropdown",
     children: [
-      { name: "PO 1", path: "/po1" },
-      { name: "PO 2", path: "/po2" },
+      { name: "PO Updates", path: "/po1" },
+      { name: "Dc Updates", path: "/clearance1" },
+       
     ],
   },
-  {
-    name: "Dispatch Clearance",
-    icon: Truck,
-    type: "dropdown",
-    children: [
-      { name: "Clearance 1", path: "/clearance1" },
-      { name: "Clearance 2", path: "/clearance2" },
-    ],
-  },
+  // {
+  //   name: "Dispatch Clearance",
+  //   icon: Truck,
+  //   type: "dropdown",
+  //   children: [
+  //     { name: "Clearance 1", path: "/clearance1" },
+  //     { name: "Clearance 2", path: "/clearance2" },
+  //   ],
+  // },
   {
     name: "STORES",
     icon: Package,
