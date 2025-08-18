@@ -102,9 +102,9 @@ export default function CreateNewProject({ onClose }) {
             <h3 className="text-lg font-semibold mb-3">Store Details</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <input type="text" placeholder="Store ID" className="border p-2 rounded w-full" />
-              <input type="text" placeholder="Project Code" className="border p-2 rounded w-full" />
+         <input type="text" placeholder="Store Phone Number" className="border p-2 rounded w-full" />
               <input type="text" placeholder="Store Address" className="border p-2 rounded w-full" />
-              <input type="text" placeholder="Store Phone Number" className="border p-2 rounded w-full" />
+              
             </div>
           </div>
 

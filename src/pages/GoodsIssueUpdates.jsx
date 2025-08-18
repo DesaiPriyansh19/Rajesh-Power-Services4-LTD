@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { MoreVertical } from "lucide-react";
+import GenerateChallan from "../popups/GenerateChallan";
 
 export default function GoodsIssueUpdates() {
   const [store, setStore] = useState("");
   const [challanNo, setChallanNo] = useState("");
   const [menuOpen, setMenuOpen] = useState(null);
-
+  const [openModal, setOpenModal] = useState(null);
   const goodsIssueData = [
     {
       challanNo: "CH-1001",
@@ -50,14 +51,14 @@ export default function GoodsIssueUpdates() {
           placeholder="Store"
           value={store}
           onChange={(e) => setStore(e.target.value)}
-          className="border p-2 rounded w-48 sm:w-56"
+          className="border p-1 rounded-xl w-48 sm:w-56 text-start pl-3"
         />
         <input
           type="text"
           placeholder="Challan No."
           value={challanNo}
           onChange={(e) => setChallanNo(e.target.value)}
-          className="border p-2 rounded w-48 sm:w-56"
+          className="border p-1 rounded-xl w-48 sm:w-56"
         />
         <button
           onClick={handleSearch}
@@ -118,6 +119,12 @@ export default function GoodsIssueUpdates() {
                   {/* Dropdown */}
                   {menuOpen === i && (
                     <div className="absolute right-4 mt-2 w-28 bg-white border rounded shadow-md z-10">
+                            <button
+                        onClick={() => setOpenModal("open")}
+                        className="block w-full text-left px-3 py-2 hover:bg-gray-100"
+                      >
+                        Aproove
+                      </button>
                       <button
                         onClick={() => alert(`Edit ${row.challanNo}`)}
                         className="block w-full text-left px-3 py-2 hover:bg-gray-100"
@@ -137,7 +144,12 @@ export default function GoodsIssueUpdates() {
             ))}
           </tbody>
         </table>
+
       </div>
+          {/* Conditionally render the different popups */}
+                    {openModal === "open" && (
+                      <GenerateChallan onClose={() => setOpenModal(null)} />
+                    )}
     </div>
   );
 }
