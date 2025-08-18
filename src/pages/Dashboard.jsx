@@ -28,7 +28,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="p-6 space-y-8">
+    <div className="p-6 space-y-8 bg-white rounded-lg box-shadow-1">
       {/* --- FIRST SECTION: 4 Cards --- */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {cards.map((card, index) => (
