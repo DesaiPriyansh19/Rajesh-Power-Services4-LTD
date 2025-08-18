@@ -34,7 +34,7 @@ export default function Dashboard() {
         {cards.map((card, index) => (
           <div
             key={index}
-            className="border border-black rounded-lg p-5 bg-white shadow-sm hover:shadow-md transition"
+            className="border border-black rounded-lg p-5 bg-white shadow-sm hover:shadow-xl transition"
           >
             <h2 className="text-sm font-medium text-gray-700">{card.title}</h2>
             <div className="flex items-center justify-between mt-4">
