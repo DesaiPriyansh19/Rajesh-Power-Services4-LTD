@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Bell, Menu, X } from "lucide-react";
 import logo from "../public/logo.png";
 import defaultProfile from "../public/profile-logo-default.png";
-
+import { motion, AnimatePresence } from "framer-motion";
 const Header = ({ sidebarOpen, setSidebarOpen, mobileSidebar, setMobileSidebar }) => {
   const [showNotifications, setShowNotifications] = useState(false);
   const dropdownRef = useRef(null);
@@ -58,39 +58,48 @@ const Header = ({ sidebarOpen, setSidebarOpen, mobileSidebar, setMobileSidebar }
           )}
         </div>
 
-        {/* Notification Dropdown */}
-        {showNotifications && (
-          <div className="absolute right-14 top-14 w-80 bg-white shadow-xl rounded-lg border border-gray-200 z-50">
-            <div className="p-3 border-b font-semibold text-gray-800">
-              Notifications
-            </div>
-            <ul className="max-h-60 overflow-y-auto">
-              {notifications.length > 0 ? (
-                notifications.map((n) => (
-                  <li
-                    key={n.id}
-                    className="px-4 py-3 hover:bg-gray-50 border-b last:border-none"
-                  >
-                    <p className="text-sm font-medium text-gray-800">
-                      {n.project}
-                    </p>
-                    <p className="text-xs text-gray-600">{n.message}</p>
-                    <p className="text-xs text-gray-400">{n.time}</p>
-                  </li>
-                ))
-              ) : (
-                <li className="p-4 text-sm text-gray-500 text-center">
-                  No new notifications
-                </li>
-              )}
-            </ul>
-            <div className="p-2 text-center">
-              <button className="text-sm text-blue-600 hover:underline">
-                View All
-              </button>
-            </div>
-          </div>
+
+
+{/* Notification Dropdown */}
+<AnimatePresence>
+  {showNotifications && (
+    <motion.div
+      initial={{ opacity: 0, y: -10, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: -10, scale: 0.95 }}
+      transition={{ duration: 0.25, ease: "easeInOut" }}
+      className="absolute right-14 top-14 w-80 bg-white shadow-xl rounded-lg border border-gray-200 z-50"
+    >
+      <div className="p-3 border-b font-semibold text-gray-800">
+        Notifications
+      </div>
+      <ul className="max-h-60 overflow-y-auto">
+        {notifications.length > 0 ? (
+          notifications.map((n) => (
+            <li
+              key={n.id}
+              className="px-4 py-3 hover:bg-gray-50 border-b last:border-none"
+            >
+              <p className="text-sm font-medium text-gray-800">{n.project}</p>
+              <p className="text-xs text-gray-600">{n.message}</p>
+              <p className="text-xs text-gray-400">{n.time}</p>
+            </li>
+          ))
+        ) : (
+          <li className="p-4 text-sm text-gray-500 text-center">
+            No new notifications
+          </li>
         )}
+      </ul>
+      <div className="p-2 text-center">
+        <button className="text-sm text-blue-600 hover:underline">
+          View All
+        </button>
+      </div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
 
         {/* Toggle Menu (Large Devices) */}
         <button

@@ -45,9 +45,24 @@ export default function POPage() {
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-normal">PURCHASE ORDER UPDATES</h1>
-        <button className="bg-[#005AAB] text-white text-sm px-4 py-2 rounded-md hover:bg-[#00427f]">
-          Upload PO
-        </button>
+     <div>
+  {/* Hidden file input */}
+  <input
+    type="file"
+    id="upload-po"
+    className="hidden"
+    onChange={(e) => console.log(e.target.files[0]?.name)}
+  />
+
+  {/* Label acts as button */}
+  <label
+    htmlFor="upload-po"
+    className="bg-[#005AAB] text-white text-sm px-4 py-2 rounded-md cursor-pointer hover:bg-[#00427f]"
+  >
+    Upload PO
+  </label>
+</div>
+
       </div>
 
       {/* Table */}
