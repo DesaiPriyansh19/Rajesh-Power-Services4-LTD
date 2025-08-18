@@ -79,7 +79,7 @@ export default function UsersPage() {
           placeholder={`Search ${activeTab}...`}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="border p-2 rounded flex-grow min-w-[250px]"
+          className="border p-2 rounded-xl flex-grow min-w-[250px]"
         />
         <button
           className={`${
@@ -88,7 +88,7 @@ export default function UsersPage() {
               : activeTab === "roles"
               ? "bg-green-600"
               : "bg-purple-600"
-          } text-white px-5 py-2 rounded hover:opacity-90 whitespace-nowrap`}
+          } text-white px-5 py-2 rounded-lg hover:opacity-90 whitespace-nowrap`}
         >
           Add {activeTab.charAt(0).toUpperCase() + activeTab.slice(1, -1)}
         </button>
