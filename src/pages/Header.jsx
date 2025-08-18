@@ -60,15 +60,16 @@ const Header = ({ sidebarOpen, setSidebarOpen, mobileSidebar, setMobileSidebar }
 
 
 
+
 {/* Notification Dropdown */}
 <AnimatePresence>
   {showNotifications && (
     <motion.div
-      initial={{ opacity: 0, y: -10, scale: 0.95 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: -10, scale: 0.95 }}
+      initial={{ opacity: 0, scale: 0.5, y: -10, x: 20 }}
+      animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
+      exit={{ opacity: 0, scale: 0.5, y: -10, x: 20 }}
       transition={{ duration: 0.25, ease: "easeInOut" }}
-      className="absolute right-14 top-14 w-80 bg-white shadow-xl rounded-lg border border-gray-200 z-50"
+      className="absolute right-14 top-14 w-80 bg-white shadow-xl rounded-lg border border-gray-200 z-50 origin-top-right"
     >
       <div className="p-3 border-b font-semibold text-gray-800">
         Notifications
@@ -99,6 +100,7 @@ const Header = ({ sidebarOpen, setSidebarOpen, mobileSidebar, setMobileSidebar }
     </motion.div>
   )}
 </AnimatePresence>
+
 
 
         {/* Toggle Menu (Large Devices) */}
