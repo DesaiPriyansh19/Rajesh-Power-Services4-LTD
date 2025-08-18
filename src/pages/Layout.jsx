@@ -28,7 +28,7 @@ const Layout = () => {
 <AnimatePresence>
   {mobileSidebar && (
     <motion.div
-      className="fixed inset-0 z-50 flex"
+      className="fixed  inset-0 bg-black/20 backdrop-blur-sm z-50 flex"
       initial="hidden"
       animate="visible"
       exit="hidden"
@@ -40,7 +40,7 @@ const Layout = () => {
     >
       {/* Backdrop */}
       <motion.div
-        className="fixed inset-0 bg-black"
+        className="fixed inset-0 "
         onClick={() => setMobileSidebar(false)}
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.5 }}
