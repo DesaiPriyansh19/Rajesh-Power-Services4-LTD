@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { MoreVertical } from "lucide-react"; // for 3 dots icon
 
 export default function UsersPage() {
-  const [searchUser, setSearchUser] = useState("");
-  const [searchRole, setSearchRole] = useState("");
-  const [searchPermission, setSearchPermission] = useState("");
+  const [activeTab, setActiveTab] = useState("users"); // default tab
+  const [search, setSearch] = useState("");
+  const [openMenuId, setOpenMenuId] = useState(null); // track which row's menu is open
 
   // --- Users data ---
   const users = [
@@ -21,48 +22,80 @@ export default function UsersPage() {
 
   // --- Permissions list ---
   const permissions = [
-    "Add User",
-    "Edit User",
-    "Delete User",
-    "View Reports",
-    "Edit Content",
-    "Publish Content",
-    "View Content",
+    { id: 1, name: "Add User" },
+    { id: 2, name: "Edit User" },
+    { id: 3, name: "Delete User" },
+    { id: 4, name: "View Reports" },
+    { id: 5, name: "Edit Content" },
+    { id: 6, name: "Publish Content" },
+    { id: 7, name: "View Content" },
   ];
 
-  // Filters
-  const filteredUsers = users.filter(
-    (u) =>
-      u.name.toLowerCase().includes(searchUser.toLowerCase()) ||
-      u.email.toLowerCase().includes(searchUser.toLowerCase())
-  );
-
-  const filteredRoles = roles.filter((r) =>
-    r.name.toLowerCase().includes(searchRole.toLowerCase())
-  );
-
-  const filteredPermissions = permissions.filter((p) =>
-    p.toLowerCase().includes(searchPermission.toLowerCase())
-  );
+  // --- Filters depending on active tab ---
+  let filteredData = [];
+  if (activeTab === "users") {
+    filteredData = users.filter(
+      (u) =>
+        u.name.toLowerCase().includes(search.toLowerCase()) ||
+        u.email.toLowerCase().includes(search.toLowerCase())
+    );
+  } else if (activeTab === "roles") {
+    filteredData = roles.filter((r) =>
+      r.name.toLowerCase().includes(search.toLowerCase())
+    );
+  } else if (activeTab === "permissions") {
+    filteredData = permissions.filter((p) =>
+      p.name.toLowerCase().includes(search.toLowerCase())
+    );
+  }
 
   return (
-    <div className="p-6 space-y-12">
-      {/* ================= USERS ================= */}
-      <section>
-        <h1 className="text-2xl font-bold mb-6">Users</h1>
-        <div className="flex flex-wrap items-center gap-4 mb-6">
-          <input
-            type="text"
-            placeholder="Search by name or email"
-            value={searchUser}
-            onChange={(e) => setSearchUser(e.target.value)}
-            className="border p-2 rounded flex-grow min-w-[250px]"
-          />
-          <button className="bg-[#005AAB] text-white px-5 py-2 rounded hover:opacity-90 whitespace-nowrap">
-            Add User
+    <div className="p-6 space-y-6">
+      {/* ===== Tabs ===== */}
+      <div className="flex gap-4 mb-6">
+        {["users", "roles", "permissions"].map((tab) => (
+          <button
+            key={tab}
+            onClick={() => {
+              setActiveTab(tab);
+              setSearch("");
+              setOpenMenuId(null);
+            }}
+            className={`px-4 py-2 rounded font-semibold ${
+              activeTab === tab
+                ? "bg-[#005AAB] text-white"
+                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+            }`}
+          >
+            {tab.charAt(0).toUpperCase() + tab.slice(1)}
           </button>
-        </div>
+        ))}
+      </div>
 
+      {/* ===== Search + Add Btn ===== */}
+      <div className="flex flex-wrap items-center gap-4 mb-6">
+        <input
+          type="text"
+          placeholder={`Search ${activeTab}...`}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="border p-2 rounded flex-grow min-w-[250px]"
+        />
+        <button
+          className={`${
+            activeTab === "users"
+              ? "bg-[#005AAB]"
+              : activeTab === "roles"
+              ? "bg-green-600"
+              : "bg-purple-600"
+          } text-white px-5 py-2 rounded hover:opacity-90 whitespace-nowrap`}
+        >
+          Add {activeTab.charAt(0).toUpperCase() + activeTab.slice(1, -1)}
+        </button>
+      </div>
+
+      {/* ===== Users Table ===== */}
+      {activeTab === "users" && (
         <div className="overflow-x-auto bg-white shadow rounded">
           <table className="min-w-full text-sm border border-gray-200">
             <thead className="bg-gray-100">
@@ -75,15 +108,15 @@ export default function UsersPage() {
               </tr>
             </thead>
             <tbody>
-              {filteredUsers.length === 0 ? (
+              {filteredData.length === 0 ? (
                 <tr>
                   <td colSpan="5" className="text-center p-4 text-gray-500">
                     No users found
                   </td>
                 </tr>
               ) : (
-                filteredUsers.map((user) => (
-                  <tr key={user.id} className="hover:bg-gray-50">
+                filteredData.map((user) => (
+                  <tr key={user.id} className="hover:bg-gray-50 relative">
                     <td className="p-3 border">{user.name}</td>
                     <td className="p-3 border">{user.email}</td>
                     <td className="p-3 border">{user.role}</td>
@@ -94,13 +127,25 @@ export default function UsersPage() {
                     >
                       {user.status}
                     </td>
-                    <td className="p-3 border text-center">
-                      <button className="bg-blue-500 text-white px-3 py-1 rounded mr-2">
-                        Edit
+                    <td className="p-3 border text-center relative">
+                      <button
+                        onClick={() =>
+                          setOpenMenuId(openMenuId === user.id ? null : user.id)
+                        }
+                        className="p-2 rounded hover:bg-gray-200"
+                      >
+                        <MoreVertical size={18} />
                       </button>
-                      <button className="bg-red-500 text-white px-3 py-1 rounded">
-                        Delete
-                      </button>
+                      {openMenuId === user.id && (
+                        <div className="absolute right-10 mt-1 bg-white shadow rounded border w-28 text-sm z-10">
+                          <button className="block w-full text-left px-3 py-2 hover:bg-gray-100">
+                            Edit
+                          </button>
+                          <button className="block w-full text-left px-3 py-2 hover:bg-gray-100 text-red-600">
+                            Delete
+                          </button>
+                        </div>
+                      )}
                     </td>
                   </tr>
                 ))
@@ -108,48 +153,56 @@ export default function UsersPage() {
             </tbody>
           </table>
         </div>
-      </section>
+      )}
 
-      {/* ================= ROLES ================= */}
-      <section>
-        <h1 className="text-2xl font-bold mb-6">Roles</h1>
-        <div className="flex flex-wrap items-center gap-4 mb-6">
-          <input
-            type="text"
-            placeholder="Search by role name"
-            value={searchRole}
-            onChange={(e) => setSearchRole(e.target.value)}
-            className="border p-2 rounded flex-grow min-w-[250px]"
-          />
-          <button className="bg-green-600 text-white px-5 py-2 rounded hover:opacity-90 whitespace-nowrap">
-            Add Role
-          </button>
-        </div>
-
+      {/* ===== Roles Table ===== */}
+      {activeTab === "roles" && (
         <div className="overflow-x-auto bg-white shadow rounded">
           <table className="min-w-full text-sm border border-gray-200">
             <thead className="bg-gray-100">
               <tr>
                 <th className="p-3 border text-left">Role</th>
                 <th className="p-3 border text-left">Permissions</th>
+                <th className="p-3 border text-center">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {filteredRoles.length === 0 ? (
+              {filteredData.length === 0 ? (
                 <tr>
-                  <td colSpan="2" className="text-center p-4 text-gray-500">
+                  <td colSpan="3" className="text-center p-4 text-gray-500">
                     No roles found
                   </td>
                 </tr>
               ) : (
-                filteredRoles.map((role) => (
-                  <tr key={role.id} className="hover:bg-gray-50">
+                filteredData.map((role) => (
+                  <tr key={role.id} className="hover:bg-gray-50 relative">
                     <td className="p-3 border">{role.name}</td>
                     <td className="p-3 border">
-                      <span className="font-semibold">{role.permissions.length}</span> permissions
+                      <span className="font-semibold">{role.permissions.length}</span>{" "}
+                      permissions
                       <div className="text-gray-600 text-xs mt-1">
                         {role.permissions.join(", ")}
                       </div>
+                    </td>
+                    <td className="p-3 border text-center relative">
+                      <button
+                        onClick={() =>
+                          setOpenMenuId(openMenuId === role.id ? null : role.id)
+                        }
+                        className="p-2 rounded hover:bg-gray-200"
+                      >
+                        <MoreVertical size={18} />
+                      </button>
+                      {openMenuId === role.id && (
+                        <div className="absolute right-10 mt-1 bg-white shadow rounded border w-28 text-sm z-10">
+                          <button className="block w-full text-left px-3 py-2 hover:bg-gray-100">
+                            Edit
+                          </button>
+                          <button className="block w-full text-left px-3 py-2 hover:bg-gray-100 text-red-600">
+                            Delete
+                          </button>
+                        </div>
+                      )}
                     </td>
                   </tr>
                 ))
@@ -157,47 +210,56 @@ export default function UsersPage() {
             </tbody>
           </table>
         </div>
-      </section>
+      )}
 
-      {/* ================= PERMISSIONS ================= */}
-      <section>
-        <h1 className="text-2xl font-bold mb-6">Permissions</h1>
-        <div className="flex flex-wrap items-center gap-4 mb-6">
-          <input
-            type="text"
-            placeholder="Search permissions"
-            value={searchPermission}
-            onChange={(e) => setSearchPermission(e.target.value)}
-            className="border p-2 rounded flex-grow min-w-[250px]"
-          />
-          <button className="bg-purple-600 text-white px-5 py-2 rounded hover:opacity-90 whitespace-nowrap">
-            Add Permission
-          </button>
-        </div>
-
+      {/* ===== Permissions Table ===== */}
+      {activeTab === "permissions" && (
         <div className="overflow-x-auto bg-white shadow rounded">
           <table className="min-w-full text-sm border border-gray-200">
             <thead className="bg-gray-100">
               <tr>
                 <th className="p-3 border text-left">Permission</th>
+                <th className="p-3 border text-center">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {filteredPermissions.length === 0 ? (
+              {filteredData.length === 0 ? (
                 <tr>
-                  <td className="text-center p-4 text-gray-500">No permissions found</td>
+                  <td colSpan="2" className="text-center p-4 text-gray-500">
+                    No permissions found
+                  </td>
                 </tr>
               ) : (
-                filteredPermissions.map((permission, idx) => (
-                  <tr key={idx} className="hover:bg-gray-50">
-                    <td className="p-3 border">{permission}</td>
+                filteredData.map((permission) => (
+                  <tr key={permission.id} className="hover:bg-gray-50 relative">
+                    <td className="p-3 border">{permission.name}</td>
+                    <td className="p-3 border text-center relative">
+                      <button
+                        onClick={() =>
+                          setOpenMenuId(openMenuId === permission.id ? null : permission.id)
+                        }
+                        className="p-2 rounded hover:bg-gray-200"
+                      >
+                        <MoreVertical size={18} />
+                      </button>
+                      {openMenuId === permission.id && (
+                        <div className="absolute right-10 mt-1 bg-white shadow rounded border w-28 text-sm z-10">
+                          <button className="block w-full text-left px-3 py-2 hover:bg-gray-100">
+                            Edit
+                          </button>
+                          <button className="block w-full text-left px-3 py-2 hover:bg-gray-100 text-red-600">
+                            Delete
+                          </button>
+                        </div>
+                      )}
+                    </td>
                   </tr>
                 ))
               )}
             </tbody>
           </table>
         </div>
-      </section>
+      )}
     </div>
   );
 }
