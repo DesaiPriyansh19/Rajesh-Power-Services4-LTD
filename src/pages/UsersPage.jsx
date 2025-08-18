@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { MoreVertical } from "lucide-react"; // for 3 dots icon
-
+import { Users, Shield, Key } from "lucide-react"; // icons
 export default function UsersPage() {
   const [activeTab, setActiveTab] = useState("users"); // default tab
   const [search, setSearch] = useState("");
@@ -50,27 +50,32 @@ export default function UsersPage() {
   }
 
   return (
-    <div className="p-6 space-y-6">
-      {/* ===== Tabs ===== */}
-      <div className="flex gap-4 mb-6">
-        {["users", "roles", "permissions"].map((tab) => (
-          <button
-            key={tab}
-            onClick={() => {
-              setActiveTab(tab);
-              setSearch("");
-              setOpenMenuId(null);
-            }}
-            className={`px-4 py-2 rounded font-semibold ${
-              activeTab === tab
-                ? "bg-[#005AAB] text-white"
-                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-            }`}
-          >
-            {tab.charAt(0).toUpperCase() + tab.slice(1)}
-          </button>
-        ))}
-      </div>
+    <div className="p-6 space-y-6 box-shadow-1 bg-white rounded-lg">
+   {/* ===== Tabs ===== */}
+<div className="flex gap-4 mb-6">
+  {[
+    { key: "users", label: "Users", icon: <Users size={18} /> },
+    { key: "roles", label: "Roles", icon: <Shield size={18} /> },
+    { key: "permissions", label: "Permissions", icon: <Key size={18} /> },
+  ].map((tab) => (
+    <button
+      key={tab.key}
+      onClick={() => {
+        setActiveTab(tab.key);
+        setSearch("");
+        setOpenMenuId(null);
+      }}
+      className={`flex items-center gap-2 px-4 py-2 rounded font-semibold transition ${
+        activeTab === tab.key
+          ? "bg-[#005AAB] text-white"
+          : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+      }`}
+    >
+      {tab.icon}
+      {tab.label}
+    </button>
+  ))}
+</div>
 
       {/* ===== Search + Add Btn ===== */}
       <div className="flex flex-wrap items-center gap-4 mb-6">
@@ -79,7 +84,7 @@ export default function UsersPage() {
           placeholder={`Search ${activeTab}...`}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="border p-2 rounded-xl flex-grow min-w-[250px]"
+          className="border-black border-[1.5px] p-2 rounded-xl flex-grow min-w-[250px]"
         />
         <button
           className={`${
@@ -96,7 +101,7 @@ export default function UsersPage() {
 
       {/* ===== Users Table ===== */}
       {activeTab === "users" && (
-        <div className="overflow-x-auto bg-white shadow rounded">
+        <div className="overflow-x-auto bg-white box-shadow-2 rounded">
           <table className="min-w-full text-sm border border-gray-200">
             <thead className="bg-gray-100">
               <tr>
@@ -157,7 +162,7 @@ export default function UsersPage() {
 
       {/* ===== Roles Table ===== */}
       {activeTab === "roles" && (
-        <div className="overflow-x-auto bg-white shadow rounded">
+        <div className="overflow-x-auto bg-white box-shadow-2 rounded">
           <table className="min-w-full text-sm border border-gray-200">
             <thead className="bg-gray-100">
               <tr>
@@ -214,7 +219,7 @@ export default function UsersPage() {
 
       {/* ===== Permissions Table ===== */}
       {activeTab === "permissions" && (
-        <div className="overflow-x-auto bg-white shadow rounded">
+        <div className="overflow-x-auto bg-white box-shadow-2 rounded">
           <table className="min-w-full text-sm border border-gray-200">
             <thead className="bg-gray-100">
               <tr>
