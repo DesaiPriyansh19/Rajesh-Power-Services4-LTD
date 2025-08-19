@@ -77,7 +77,7 @@ export default function GoodsReceipt() {
     
     className="bg-[#005AAB] text-white px-4 py-2 rounded hover:bg-[#005AAB] whitespace-nowrap"
   >
-    Create New Goods
+    Create New 
   </button>
 </div>
 

@@ -74,7 +74,7 @@ const menuItems = [
       { name:"Store Manager", path:"/store-manager" },
     ],
   },
-  { name: "Goods Manage",
+  { name: "Manage Goods",
      icon: ClipboardList, 
      type: "dropdown",
      children:[
