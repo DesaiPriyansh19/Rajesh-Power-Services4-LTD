@@ -74,7 +74,15 @@ const menuItems = [
       { name:"Store Manager", path:"/store-manager" },
     ],
   },
-  { name: "GOODS ISSUE UPDATES", icon: ClipboardList, type: "link", path: "/goods-issue-updates" },
+  { name: "Goods Manage",
+     icon: ClipboardList, 
+     type: "dropdown",
+     children:[
+      { name:"Goods Recived", path:"/goods-received" },
+      { name:"Goods Isuue", path:"/goods-issue" },
+      { name:"Goods Recipt", path:"/goods-receipt" },
+   
+    ], },
   { name: "Project", icon: Folder, type: "link", path: "/projects" },
   { name: "Reports", icon: BarChart, type: "link", path: "/reports" },
   { name: "Users", icon: User, type: "link", path: "/users" },

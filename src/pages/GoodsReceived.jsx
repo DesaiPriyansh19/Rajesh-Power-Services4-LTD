@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-import { MoreVertical,PackageMinus } from "lucide-react";
-import GenerateChallan from "../popups/GenerateChallan";
 
-export default function GoodsIssueUpdates() {
+
+import React, { useState } from "react";
+import { MoreVertical } from "lucide-react";
+import GenerateChallan from "../popups/GenerateChallan";
+import { PackageCheck } from "lucide-react";
+export default function GoodsReceived() {
   const [store, setStore] = useState("");
   const [challanNo, setChallanNo] = useState("");
   const [menuOpen, setMenuOpen] = useState(null);
@@ -41,13 +43,13 @@ export default function GoodsIssueUpdates() {
 
   return (
     <div className="p-4 bg-white rounded-md box-shadow-1">
-  {/* Heading with Icon */}
+   {/* Heading with Icon */}
       <h1 className="text-2xl mb-6 flex items-center gap-2">
-        <PackageMinus className="w-6 h-6 text-red-600" />
-        GOODS ISSUE
+        <PackageCheck className="w-6 h-6 text-green-600" />
+        Goods Received
       </h1>
 
-  {/* Search bar and button all in one line */}
+     {/* Search bar and button all in one line */}
 <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
   {/* Left side - inputs and search btn */}
   <div className="flex flex-wrap items-center gap-4">
@@ -81,7 +83,6 @@ export default function GoodsIssueUpdates() {
     Create New Goods
   </button>
 </div>
-
 
       {/* Table */}
       <div className="overflow-x-auto bg-white box-shadow-2 rounded-xl">
