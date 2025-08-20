@@ -1,14 +1,23 @@
 
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+
 import { MoreVertical } from "lucide-react";
 import GenerateChallan from "../popups/GenerateChallan";
 import { PackageCheck } from "lucide-react";
+import { useReactToPrint } from "react-to-print";
+
+import DeliveryChallanDownload from "../utils/DeliveryChallanDownload";
 export default function GoodsReceived() {
   const [store, setStore] = useState("");
   const [challanNo, setChallanNo] = useState("");
   const [menuOpen, setMenuOpen] = useState(null);
   const [openModal, setOpenModal] = useState(null);
+    // ✅ define print function
+  const handleDownload = useReactToPrint({
+    content: () => challanRef.current,
+    documentTitle: "DeliveryChallan",
+  });
   const goodsIssueData = [
     {
       challanNo: "CH-1001",
@@ -40,6 +49,13 @@ export default function GoodsReceived() {
   const toggleMenu = (index) => {
     setMenuOpen(menuOpen === index ? null : index);
   };
+  const challanRef = useRef();
+
+const handleDownloadClick = () => {
+  handleDownload();
+  setMenuOpen(null); // close after printing
+};
+
 
   return (
     <div className="p-4 bg-white rounded-md box-shadow-1">
@@ -135,6 +151,15 @@ export default function GoodsReceived() {
                   {/* Dropdown */}
                   {menuOpen === i && (
                     <div className="absolute right-4 mt-2 w-28 bg-white border rounded shadow-md z-10">
+                             <button
+                       onClick={() => {
+    handleDownload(); // ⬅️ this triggers the print/download
+    setDropdownOpen(false); // ⬅️ this closes the dropdown
+  }}
+                        className="block w-full text-left px-3 py-2 hover:bg-gray-100"
+                      >
+                        download
+                      </button>
                             <button
                         onClick={() => setOpenModal("open")}
                         className="block w-full text-left px-3 py-2 hover:bg-gray-100"
@@ -160,7 +185,10 @@ export default function GoodsReceived() {
             ))}
           </tbody>
         </table>
-
+  {/* Hidden Challan (for PDF) */}
+      <div style={{ display: "none" }}>
+        <DeliveryChallanDownload ref={challanRef} />
+      </div>
       </div>
           {/* Conditionally render the different popups */}
                     {openModal === "open" && (

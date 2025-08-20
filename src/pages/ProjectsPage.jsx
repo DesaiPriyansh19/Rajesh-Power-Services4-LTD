@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import CreateNewProject from "../popups/CreateNewProject";
 import ManageProject from "../popups/ManageProject";
-
+import { MoreVertical } from "lucide-react"; // 3 dots icon
 export default function ProjectsPage() {
   const [projectCode, setProjectCode] = useState("");
   const [associatedCompany, setAssociatedCompany] = useState("");
     const [openModal, setOpenModal] = useState(null);
+  const [openMenuId, setOpenMenuId] = useState(null); // track which row is open
+        const toggleMenu = (id) => {
+    setOpenMenuId(openMenuId === id ? null : id); // toggle only that row
+  };
   const projectsData = [
     {
       projectCode: "PRJ-001",
@@ -106,14 +110,26 @@ export default function ProjectsPage() {
                 >
                   {proj.status}
                 </td>
-                <td className="p-3 border">
-                  <button className="bg-blue-500 text-white px-3 py-1 rounded mr-2">
-                    Edit
-                  </button>
-                  <button className="bg-red-500 text-white px-3 py-1 rounded">
-                    Delete
-                  </button>
-                </td>
+   {/* Actions cell */}
+              <td className="p-3 border relative">
+                <button
+                  className="p-2 rounded hover:bg-gray-100"
+                  onClick={() => toggleMenu(i)}
+                >
+                  <MoreVertical className="w-5 h-5" />
+                </button>
+
+                {openMenuId === i && (
+                  <div className="absolute right-0 mt-0 rounded-xl  w-28 bg-white border  shadow-lg z-10">
+                    <button className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100">
+                      Edit
+                    </button>
+                    <button className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">
+                      Delete
+                    </button>
+                  </div>
+                )}
+              </td>
               </tr>
             ))}
           </tbody>

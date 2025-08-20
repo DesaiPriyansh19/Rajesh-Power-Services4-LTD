@@ -9,25 +9,24 @@ export default function GoodsIssueUpdates() {
   const [openModal, setOpenModal] = useState(null);
   const goodsIssueData = [
     {
-      challanNo: "CH-1001",
-      deliveredTo: "Warehouse 1",
-      status: "Approved",
-      projectCode: "PRJ-001",
-      storeId: "ST-101",
+      itemName:"wires",
+     itemQyt:"2300",
+      issueQty:"200",
+      AddedQty:"20",
+      
+      
     },
     {
-      challanNo: "CH-1002",
-      deliveredTo: "Warehouse 2",
-      status: "Pending",
-      projectCode: "PRJ-002",
-      storeId: "ST-102",
+     itemName:"wires",
+     itemQyt:"2300",
+      issueQty:"200",
+      AddedQty:"20",
     },
     {
-      challanNo: "CH-1003",
-      deliveredTo: "Warehouse 3",
-      status: "Approved",
-      projectCode: "PRJ-003",
-      storeId: "ST-103",
+   itemName:"wires",
+     itemQyt:"2300",
+      issueQty:"200",
+      AddedQty:"20",
     },
   ];
 
@@ -53,18 +52,12 @@ export default function GoodsIssueUpdates() {
   <div className="flex flex-wrap items-center gap-4">
     <input
       type="text"
-      placeholder="Store"
+      placeholder="Item Name"
       value={store}
       onChange={(e) => setStore(e.target.value)}
       className="border p-1 rounded-xl w-48 sm:w-56 text-start pl-3"
     />
-    <input
-      type="text"
-      placeholder="Challan No."
-      value={challanNo}
-      onChange={(e) => setChallanNo(e.target.value)}
-      className="border p-1 rounded-xl w-48 sm:w-56"
-    />
+ 
     <button
       onClick={handleSearch}
       className="bg-[#005AAB] text-white px-4 py-2 rounded hover:opacity-90 whitespace-nowrap"
@@ -78,7 +71,7 @@ export default function GoodsIssueUpdates() {
     
     className="bg-[#005AAB] text-white px-4 py-2 rounded hover:bg-[#005AAB] whitespace-nowrap"
   >
-    Create New 
+    Create Challan
   </button>
 </div>
 
@@ -88,11 +81,10 @@ export default function GoodsIssueUpdates() {
         <table className="min-w-full border border-gray-200 text-sm">
           <thead>
             <tr>
-              <th className="p-3 border">Challan No.</th>
-              <th className="p-3 border">Delivered To</th>
-              <th className="p-3 border">Status</th>
-              <th className="p-3 border">Project Code</th>
-              <th className="p-3 border">Store ID</th>
+              <th className="p-3 border">Item Name</th>
+              <th className="p-3 border">Item Qyt</th>
+              <th className="p-3 border">Issue Quntity</th>
+          <th className="p-3 border">Added Quntity</th>
               <th className="p-3 border">Actions</th>
             </tr>
           </thead>
@@ -104,24 +96,15 @@ export default function GoodsIssueUpdates() {
                   i % 2 === 0 ? "bg-gray-50" : ""
                 }`}
               >
-                <td className="p-3 border">{row.challanNo}</td>
-                <td className="p-3 border">{row.deliveredTo}</td>
-        {/* ✅ Status column */}
-      <td className="p-3 border">
-        <span
-          className={`px-3 py-1 rounded-full text-sm  ${
-            row.status === "Pending"
-              ? "bg-[#FFDA8B] text-black"
-              : row.status === "Approved"
-              ? "bg-[#C7F4B2] text-black"
-              : "bg-gray-200 text-gray-700"
-          }`}
-        >
-          {row.status}
-        </span>
-      </td>
-                <td className="p-3 border">{row.projectCode}</td>
-                <td className="p-3 border">{row.storeId}</td>
+                <td className="p-3 border">{row.itemName}</td>
+                <td className="p-3 border">{row.itemQyt}</td>
+                <td className="p-3 border">{row.issueQty}</td>
+
+
+                <td className="p-3 border"> {row.AddedQty}</td>
+ 
+                
+            
                 <td className="p-3 border relative">
                   {/* Three Dots Button */}
                   <button
@@ -138,19 +121,14 @@ export default function GoodsIssueUpdates() {
                         onClick={() => setOpenModal("open")}
                         className="block w-full text-left px-3 py-2 hover:bg-gray-100"
                       >
-                        Aproove
+                       Add
                       </button>
-                      <button
-                        onClick={() => alert(`Edit ${row.challanNo}`)}
-                        className="block w-full text-left px-3 py-2 hover:bg-gray-100"
-                      >
-                        Edit
-                      </button>
+                  
                       <button
                         onClick={() => alert(`Delete ${row.challanNo}`)}
                         className="block w-full text-left px-3 py-2 hover:bg-gray-100 text-red-500"
                       >
-                        Delete
+                      Remove
                       </button>
                     </div>
                   )}

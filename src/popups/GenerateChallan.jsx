@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import DeliveryChallan from "./DeliveryChallan";
+import DeliveryChallanTwo from "./DeliveryChallanTwo";
 
 export default function GenerateChallan({ onClose }) {
       const [openModal, setOpenModal] = useState(null);
@@ -142,7 +143,7 @@ export default function GenerateChallan({ onClose }) {
         </motion.div>
           {/* Conditionally render the different popups */}
                             {openModal === "open" && (
-                              <DeliveryChallan onClose={() => setOpenModal(null)} />
+                              <DeliveryChallanTwo onClose={() => setOpenModal(null)} />
                             )}
       </div>
     </AnimatePresence>

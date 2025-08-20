@@ -1,6 +1,11 @@
 import React from "react";
-
+import { useState } from "react";
+import { MoreVertical } from "lucide-react"; // 3 dots icon
 export default function POPage() {
+    const [openMenuId, setOpenMenuId] = useState(null); // track which row is open
+          const toggleMenu = (id) => {
+      setOpenMenuId(openMenuId === id ? null : id); // toggle only that row
+    };
   // Sample data
   const poData = [
     {
@@ -102,11 +107,26 @@ export default function POPage() {
                     po.poSettlement
                   )}
                 </td>
-                <td className="px-4 py-3 border">
-                  <button className="text-blue-600 hover:underline">
-                    Edit
-                  </button>
-                </td>
+               {/* Actions cell */}
+              <td className="p-3 border relative">
+                <button
+                  className="p-2 rounded hover:bg-gray-100"
+                  onClick={() => toggleMenu(idx)}
+                >
+                  <MoreVertical className="w-5 h-5" />
+                </button>
+
+                {openMenuId === idx && (
+                  <div className="absolute right-0 mt-0 rounded-xl  w-28 bg-white border  shadow-lg z-10">
+                    <button className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100">
+                      Edit
+                    </button>
+                    <button className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">
+                      Delete
+                    </button>
+                  </div>
+                )}
+              </td>
               </tr>
             ))}
           </tbody>
