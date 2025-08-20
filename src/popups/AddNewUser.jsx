@@ -7,13 +7,24 @@ export default function AddNewUser({ onClose }) {
     name: "",
     mobile: "",
     password: "",
+    role: "", // new field
     description: "",
+    permissions: [], // new field
   });
   const [preview, setPreview] = useState(null);
 
+  const permissionsList = [
+    "View Dashboard",
+    "Manage Users",
+    "Edit Content",
+    "Delete Records",
+    "Generate Reports",
+  ];
+
   // handle input change
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
+    const { name, value, files, type, checked } = e.target;
+
     if (name === "img") {
       const file = files[0];
       setFormData({ ...formData, img: file });
@@ -22,6 +33,14 @@ export default function AddNewUser({ onClose }) {
       } else {
         setPreview(null);
       }
+    } else if (name === "permissions") {
+      let updatedPermissions = [...formData.permissions];
+      if (checked) {
+        updatedPermissions.push(value);
+      } else {
+        updatedPermissions = updatedPermissions.filter((p) => p !== value);
+      }
+      setFormData({ ...formData, permissions: updatedPermissions });
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -72,7 +91,7 @@ export default function AddNewUser({ onClose }) {
               <label className="block text-sm font-medium text-gray-700">
                 Profile Image
               </label>
-                {preview && (
+              {preview && (
                 <div className="mt-3">
                   <img
                     src={preview}
@@ -88,7 +107,6 @@ export default function AddNewUser({ onClose }) {
                 onChange={handleChange}
                 className="mt-1 block w-full text-sm text-gray-700 border rounded-lg p-2"
               />
-            
             </div>
 
             {/* Name */}
@@ -139,6 +157,26 @@ export default function AddNewUser({ onClose }) {
               />
             </div>
 
+            {/* User Role Dropdown */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                User Role
+              </label>
+              <select
+                name="role"
+                value={formData.role}
+                onChange={handleChange}
+                className="mt-1 block w-full border rounded-lg p-2"
+                required
+              >
+                <option value="">Select Role</option>
+                <option value="Admin">Admin</option>
+                <option value="Manager">Manager</option>
+                <option value="Staff">Staff</option>
+                <option value="Viewer">Viewer</option>
+              </select>
+            </div>
+
             {/* Description */}
             <div>
               <label className="block text-sm font-medium text-gray-700">
@@ -152,6 +190,28 @@ export default function AddNewUser({ onClose }) {
                 className="mt-1 block w-full border rounded-lg p-2"
                 rows="3"
               />
+            </div>
+
+            {/* Permissions */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Permissions
+              </label>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-2">
+                {permissionsList.map((perm) => (
+                  <label key={perm} className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      name="permissions"
+                      value={perm}
+                      checked={formData.permissions.includes(perm)}
+                      onChange={handleChange}
+                      className="rounded border-gray-300"
+                    />
+                    <span className="text-sm text-gray-700">{perm}</span>
+                  </label>
+                ))}
+              </div>
             </div>
 
             {/* Buttons */}

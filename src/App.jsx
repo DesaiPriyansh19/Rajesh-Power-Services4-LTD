@@ -11,7 +11,7 @@ import GoodsIssueUpdates from "./pages/manage goods/GoodsIssueUpdates";
 import ProjectsPage from "./pages/ProjectsPage";
 import Reports from "./pages/Reports";
 import UsersPage from "./pages/UsersPage";
-import AnimatedPage from "./pages/AnimatedPage";
+import AnimatedPage from "./utils/AnimatedPage";
 import StoreHoldingsPage from "./pages/stores/StoreHoldingsPage";
 import StoreDCPage from "./pages/stores/StoreDCPage";
 import StoreManagerPage from "./pages/stores/StoreManagerPage";

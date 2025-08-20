@@ -68,7 +68,7 @@ const Login = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       setElectricEffect(false);
       navigate("/home"); // redirect
-    }, 1500);
+    }, 600);
 
     return () => {
       cancelAnimationFrame(animationId);
