@@ -78,7 +78,7 @@ const menuItems = [
      icon: ClipboardList, 
      type: "dropdown",
      children:[
-      { name:"Goods Recived", path:"/goods-received" },
+      { name:"Recive Goods", path:"/goods-received" },
       { name:"Goods Isuue", path:"/goods-issue" },
       { name:"Goods Recipt", path:"/goods-receipt" },
    

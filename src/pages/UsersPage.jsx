@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { MoreVertical } from "lucide-react"; // for 3 dots icon
 import { Users, Shield, Key } from "lucide-react"; // icons
+import AddNewUser from "../popups/AddNewUser";
+import AddNewRole from "../popups/AddNewRole";
+import AddNewPermission from "../popups/AddNewPermission";
 export default function UsersPage() {
   const [activeTab, setActiveTab] = useState("users"); // default tab
   const [search, setSearch] = useState("");
   const [openMenuId, setOpenMenuId] = useState(null); // track which row's menu is open
+const [openModal, setOpenModal] = useState(null);
 
   // --- Users data ---
   const users = [
@@ -86,17 +90,19 @@ export default function UsersPage() {
           onChange={(e) => setSearch(e.target.value)}
           className="border-black border-[1.5px] p-2 rounded-xl flex-grow min-w-[250px]"
         />
-        <button
-          className={`${
-            activeTab === "users"
-              ? "bg-[#005AAB]"
-              : activeTab === "roles"
-              ? "bg-green-600"
-              : "bg-purple-600"
-          } text-white px-5 py-2 rounded-lg hover:opacity-90 whitespace-nowrap`}
-        >
-          Add {activeTab.charAt(0).toUpperCase() + activeTab.slice(1, -1)}
-        </button>
+    <button
+  onClick={() => setOpenModal(activeTab)}  // <-- open modal dynamically
+  className={`${
+    activeTab === "users"
+      ? "bg-[#005AAB]"
+      : activeTab === "roles"
+      ? "bg-green-600"
+      : "bg-purple-600"
+  } text-white px-5 py-2 rounded-lg hover:opacity-90 whitespace-nowrap`}
+>
+  Add {activeTab.charAt(0).toUpperCase() + activeTab.slice(1, -1)}
+</button>
+
       </div>
 
       {/* ===== Users Table ===== */}
@@ -265,6 +271,16 @@ export default function UsersPage() {
           </table>
         </div>
       )}
+      {/* ===== Dynamic Popups ===== */}
+{openModal === "users" && (
+  <AddNewUser onClose={() => setOpenModal(null)} />
+)} {openModal === "roles" && (
+  <AddNewRole onClose={() => setOpenModal(null)} />
+)}
+
+{openModal === "permissions" && (
+  <AddNewPermission onClose={() => setOpenModal(null)} />
+)}
     </div>
   );
 }

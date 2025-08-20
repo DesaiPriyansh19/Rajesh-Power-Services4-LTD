@@ -46,7 +46,7 @@ export default function GoodsReceived() {
    {/* Heading with Icon */}
       <h1 className="text-2xl mb-6 flex items-center gap-2">
         <PackageCheck className="w-6 h-6 text-green-600" />
-        Goods Received
+         Receive Goods
       </h1>
 
      {/* Search bar and button all in one line */}
@@ -55,18 +55,18 @@ export default function GoodsReceived() {
   <div className="flex flex-wrap items-center gap-4">
     <input
       type="text"
-      placeholder="Store"
+      placeholder="DC"
       value={store}
       onChange={(e) => setStore(e.target.value)}
       className="border p-1 rounded-xl w-48 sm:w-56 text-start pl-3"
     />
-    <input
+    {/* <input
       type="text"
       placeholder="Challan No."
       value={challanNo}
       onChange={(e) => setChallanNo(e.target.value)}
       className="border p-1 rounded-xl w-48 sm:w-56"
-    />
+    /> */}
     <button
       onClick={handleSearch}
       className="bg-[#005AAB] text-white px-4 py-2 rounded hover:opacity-90 whitespace-nowrap"

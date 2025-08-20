@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import react from "react";
 import { AnimatePresence } from "framer-motion";
-
 import Login from "./pages/Login";
 import Layout from "./pages/Layout";
 import Dashboard from "./pages/Dashboard";
