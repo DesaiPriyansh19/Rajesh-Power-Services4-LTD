@@ -68,7 +68,7 @@ export default function AddNewUser({ onClose }) {
 
         {/* Popup */}
         <motion.div
-          className="relative bg-white rounded-lg shadow-lg w-[90%] sm:w-[80%] md:w-[55%] max-w-5xl p-6 z-10 overflow-y-auto max-h-[90vh]"
+          className="relative bg-white rounded-lg shadow-lg w-[90%] sm:w-[80%] md:w-[75%] max-w-5xl p-6 z-10 overflow-y-auto max-h-[90vh]"
           initial={{ opacity: 0, scale: 0.95, y: -20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: -20 }}
