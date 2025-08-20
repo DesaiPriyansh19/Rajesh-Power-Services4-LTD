@@ -3,11 +3,11 @@
 import React, { useRef, useState } from "react";
 
 import { MoreVertical } from "lucide-react";
-import GenerateChallan from "../popups/GenerateChallan";
+import GenerateChallan from "../../popups/GenerateChallan";
 import { PackageCheck } from "lucide-react";
 import { useReactToPrint } from "react-to-print";
 
-import DeliveryChallanDownload from "../utils/DeliveryChallanDownload";
+import DeliveryChallanDownload from "../../utils/DeliveryChallanDownload";
 export default function GoodsReceived() {
   const [store, setStore] = useState("");
   const [challanNo, setChallanNo] = useState("");

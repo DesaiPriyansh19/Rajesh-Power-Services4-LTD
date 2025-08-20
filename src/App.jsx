@@ -7,7 +7,7 @@ import Dashboard from "./pages/Dashboard";
 import POPage from "./pages/POPage";
 import DispatchPage from "./pages/DispatchPage";
 import StorePage from "./pages/stores/StorePage";
-import GoodsIssueUpdates from "./pages/GoodsIssueUpdates";
+import GoodsIssueUpdates from "./pages/manage goods/GoodsIssueUpdates";
 import ProjectsPage from "./pages/ProjectsPage";
 import Reports from "./pages/Reports";
 import UsersPage from "./pages/UsersPage";
@@ -15,8 +15,8 @@ import AnimatedPage from "./pages/AnimatedPage";
 import StoreHoldingsPage from "./pages/stores/StoreHoldingsPage";
 import StoreDCPage from "./pages/stores/StoreDCPage";
 import StoreManagerPage from "./pages/stores/StoreManagerPage";
-import GoodsReceipt from "./pages/GoodsReceipt";
-import GoodsReceived from "./pages/GoodsReceived";
+import GoodsReceipt from "./pages/manage goods/GoodsReceipt";
+import GoodsReceived from "./pages/manage goods/GoodsReceived";
 
 // Create a wrapper component that uses location to support AnimatePresence
 function AnimatedRoutes() {

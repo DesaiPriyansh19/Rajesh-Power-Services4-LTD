@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { MoreVertical,FileText } from "lucide-react";
-import GenerateChallan from "../popups/GenerateChallan";
+import GenerateChallan from "../../popups/GenerateChallan";
 
 export default function GoodsReceipt() {
   const [store, setStore] = useState("");

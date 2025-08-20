@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { MoreVertical,PackageMinus } from "lucide-react";
-import GenerateChallan from "../popups/GenerateChallan";
+import GenerateChallan from "../../popups/GenerateChallan";
 
 export default function GoodsIssueUpdates() {
   const [store, setStore] = useState("");
