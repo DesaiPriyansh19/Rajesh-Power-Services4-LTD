@@ -215,17 +215,17 @@ export default function AddNewUser({ onClose }) {
             </div>
 
             {/* Buttons */}
-            <div className="flex justify-end gap-4 mt-6">
+            <div className="flex justify-end font-medium gap-4 mt-6">
               <button
                 type="button"
-                className="px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-100"
+                className="bg-gray-800 text-sm rounded-md hover:bg-gray-500 text-white px-4 py-2  w-full sm:w-auto"
                 onClick={onClose}
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                className="px-4 py-2  text-white bg-[#005AAB] text-sm rounded-md hover:bg-[#0068c3]"
               >
                 Save User
               </button>
