@@ -56,6 +56,8 @@ const [openModal, setOpenModal] = useState(null);
   return (
     <div className="p-6 space-y-6 box-shadow-1 bg-white rounded-lg">
    {/* ===== Tabs ===== */}
+   <div className="">
+<div className="flex justify-between">
 <div className="flex gap-4 mb-6">
   {[
     { key: "users", label: "Users", icon: <Users size={18} /> },
@@ -79,8 +81,21 @@ const [openModal, setOpenModal] = useState(null);
       {tab.label}
     </button>
   ))}
+ 
 </div>
-
+     <button
+  onClick={() => setOpenModal(activeTab)}  // <-- open modal dynamically
+  className={`${
+    activeTab === "users"
+      ? "bg-black"
+      : activeTab === "roles"
+      ? "bg-green-800"
+      : "bg-purple-800"
+  } text-white px-4 py-2 mb-6 rounded-lg hover:opacity-90 hover:scale-95 whitespace-nowrap`}
+>
+  + Add {activeTab.charAt(0).toUpperCase() + activeTab.slice(1, -1)}
+</button>
+</div>
       {/* ===== Search + Add Btn ===== */}
       <div className="flex flex-wrap items-center gap-4 mb-6">
         <input
@@ -90,19 +105,9 @@ const [openModal, setOpenModal] = useState(null);
           onChange={(e) => setSearch(e.target.value)}
           className="border-black border-[1.5px] p-2 rounded-xl flex-grow min-w-[250px]"
         />
-    <button
-  onClick={() => setOpenModal(activeTab)}  // <-- open modal dynamically
-  className={`${
-    activeTab === "users"
-      ? "bg-[#005AAB]"
-      : activeTab === "roles"
-      ? "bg-green-600"
-      : "bg-purple-600"
-  } text-white px-5 py-2 rounded-lg hover:opacity-90 whitespace-nowrap`}
->
-  Add {activeTab.charAt(0).toUpperCase() + activeTab.slice(1, -1)}
-</button>
 
+
+      </div>
       </div>
 
       {/* ===== Users Table ===== */}
