@@ -57,7 +57,7 @@ const [openModal, setOpenModal] = useState(null);
     <div className="p-6 space-y-6 box-shadow-1 bg-white rounded-lg">
    {/* ===== Tabs ===== */}
    <div className="">
-<div className="flex justify-between">
+<div className=" sm:flex justify-between">
 <div className="flex gap-4 mb-6">
   {[
     { key: "users", label: "Users", icon: <Users size={18} /> },
