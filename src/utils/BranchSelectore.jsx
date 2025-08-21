@@ -23,14 +23,14 @@ export default function BranchSelector({ stores, defaultStore }) {
   };
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative border rounded-md" ref={dropdownRef}>
       {/* Button */}
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-2 px-4 py-2  hover:shadow-sm 
+        className="flex items-center gap-2 px-2 py-2  hover:shadow-sm 
                    rounded-lg text-[.4rem] sm:text-sm font-medium text-gray-700"
       >
-        <Store size={16} className="text-orange-500" />
+        <Store size={16} className="text-black" />
         {currentStore}
         <ChevronDown
           size={16}

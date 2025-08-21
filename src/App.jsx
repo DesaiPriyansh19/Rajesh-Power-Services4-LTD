@@ -18,6 +18,7 @@ import StoreManagerPage from "./pages/stores/StoreManagerPage";
 import GoodsReceipt from "./pages/manage goods/GoodsReceipt";
 import GoodsReceived from "./pages/manage goods/GoodsReceived";
 import UserProfile from "./pages/UserProfile";
+import ProjectDetails from "./pages/ProjectDetails";
 
 // Create a wrapper component that uses location to support AnimatePresence
 function AnimatedRoutes() {
@@ -147,6 +148,14 @@ function AnimatedRoutes() {
             element={
               <AnimatedPage>
                 <ProjectsPage />
+              </AnimatedPage>
+            }
+          />
+            <Route
+            path="/project-details"
+            element={
+              <AnimatedPage>
+                <ProjectDetails/>
               </AnimatedPage>
             }
           />

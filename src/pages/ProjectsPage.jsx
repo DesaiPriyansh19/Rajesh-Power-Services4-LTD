@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import CreateNewProject from "../popups/CreateNewProject";
 import ManageProject from "../popups/ManageProject";
 import { MoreVertical } from "lucide-react"; // 3 dots icon
+import { Link } from "react-router-dom";
 export default function ProjectsPage() {
   const [projectCode, setProjectCode] = useState("");
   const [associatedCompany, setAssociatedCompany] = useState("");
@@ -97,7 +98,7 @@ export default function ProjectsPage() {
                   i % 2 === 0 ? "bg-gray-50" : ""
                 }`}
               >
-                <td className="p-3 border">{proj.projectCode}</td>
+               <Link to={"/project-details"}><td className="p-3 border">{proj.projectCode}</td></Link> 
                 <td className="p-3 border">{proj.storeId}</td>
                 <td className="p-3 border">{proj.company}</td>
                 <td className="p-3 border">{proj.locations}</td>

@@ -38,15 +38,15 @@ export default function UserProfileCard({ user }) {
       {/* Details */}
       <div className="space-y-3 text-sm text-gray-700">
         <div className="flex items-center gap-2">
-          <Phone size={16} className="text-blue-500" />
+          <Phone size={16} className="text-black" />
           <span>{user.mobile}</span>
         </div>
         <div className="flex items-center gap-2">
-          <Store size={16} className="text-orange-500" />
+          <Store size={16} className="text-black" />
           <span>{user.store}</span>
         </div>
         <div className="flex items-center gap-2">
-          <ShoppingBag size={16} className="text-green-500" />
+          <ShoppingBag size={16} className="text-black" />
           <span>{user.storeCount} Stores</span>
         </div>
       </div>

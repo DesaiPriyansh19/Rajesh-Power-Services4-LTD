@@ -62,7 +62,7 @@ const Header = ({ sidebarOpen, setSidebarOpen, mobileSidebar, setMobileSidebar }
  {/* Right side */}
 <div className="flex items-center gap-4">
       {/* Branch Selector */}
-      <BranchSelector stores={user.stores} defaultStore="Ahmedabad Branch" />
+      <BranchSelector stores={user.stores} defaultStore="gota" />
   {/* Profile Menu Wrapper */}
   <div className="relative" ref={popupRef}>
   {/* Profile Image Trigger */}
