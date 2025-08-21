@@ -57,7 +57,7 @@ export default function AddNewPermission({ onClose }) {
           <h2 className="text-xl font-semibold   mb-6">Add New Permission</h2>
 <input type="text" placeholder="permission name" className="px-1 py-2 border w-full border-gray-500 rounded-md mb-3"/>
     <input type="text" placeholder="Discreption" className="px-1 py-2 border w-full border-gray-500 rounded-md mb-10 "/>
-<button className="bg-blue-500 text-white absolute right-4 bottom-2 px-3 py-2 rounded-md">Submit</button>
+<button className="bg-black text-white absolute right-4 bottom-2 px-3 py-2 rounded-md">Submit</button>
     
         </motion.div>
       </div>

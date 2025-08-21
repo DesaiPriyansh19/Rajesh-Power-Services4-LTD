@@ -66,7 +66,7 @@ export default function AddNewRole({ onClose }) {
      <span className=" flex justify-center gap-1 items-center"><label>name</label>    <input type="checkbox" placeholder="name of permissions" className=" "/></span>
      <span className=" flex justify-center gap-1 items-center"><label>name</label>    <input type="checkbox" placeholder="name of permissions" className=" "/></span>
        </div>
-       <button className="bg-blue-500 text-white absolute right-4 bottom-2 px-3 py-2 rounded-md">Submit</button> </motion.div>
+       <button className="bg-black text-white absolute right-4 bottom-2 px-3 py-2 rounded-md">Submit</button> </motion.div>
       </div>
     </AnimatePresence>
   );

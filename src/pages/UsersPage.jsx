@@ -89,8 +89,8 @@ const [openModal, setOpenModal] = useState(null);
     activeTab === "users"
       ? "bg-black"
       : activeTab === "roles"
-      ? "bg-green-800"
-      : "bg-purple-800"
+      ? "bg-black"
+      : "bg-black"
   } text-white px-4 py-2 mb-6 rounded-lg hover:opacity-90 hover:scale-95 whitespace-nowrap`}
 >
   + Add {activeTab.charAt(0).toUpperCase() + activeTab.slice(1, -1)}
