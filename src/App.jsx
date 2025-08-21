@@ -19,6 +19,8 @@ import GoodsReceipt from "./pages/manage goods/GoodsReceipt";
 import GoodsReceived from "./pages/manage goods/GoodsReceived";
 import UserProfile from "./pages/UserProfile";
 import ProjectDetails from "./pages/ProjectDetails";
+import Challan from "./pages/manage goods/Challan";
+import GRN from "./pages/manage goods/GRN";
 
 // Create a wrapper component that uses location to support AnimatePresence
 function AnimatedRoutes() {
@@ -136,10 +138,18 @@ function AnimatedRoutes() {
             }
           />
                <Route
-            path="/goods-receipt"
+            path="/challan"
             element={
               <AnimatedPage>
-                <GoodsReceipt/>
+                <Challan/>
+              </AnimatedPage>
+            }
+          />
+                <Route
+            path="/grn"
+            element={
+              <AnimatedPage>
+                <GRN/>
               </AnimatedPage>
             }
           />

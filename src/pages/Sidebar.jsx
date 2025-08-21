@@ -80,8 +80,8 @@ const menuItems = [
      children:[
       { name:"Recive Goods", path:"/goods-received" },
       { name:"Goods Isuue", path:"/goods-issue" },
-      { name:"Challan", path:"/goods-receipt" },
-            { name:"GRN", path:"/goods-receipt" },
+      { name:"Challan", path:"/challan" },
+            { name:"GRN", path:"/grn" },
    
     ], },
   { name: "Project", icon: Folder, type: "link", path: "/projects" },
