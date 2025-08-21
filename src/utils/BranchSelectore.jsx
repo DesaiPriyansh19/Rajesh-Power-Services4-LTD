@@ -28,7 +28,7 @@ export default function BranchSelector({ stores, defaultStore }) {
       <button
         onClick={() => setOpen(!open)}
         className="flex items-center gap-2 px-2 py-2  hover:shadow-sm 
-                   rounded-lg text-[.4rem] sm:text-sm font-medium text-gray-700"
+                   rounded-lg text-sm font-medium text-gray-700"
       >
         <Store size={16} className="text-black" />
         {currentStore}
@@ -46,7 +46,7 @@ export default function BranchSelector({ stores, defaultStore }) {
           {/* Label */}
           <div className="flex items-center gap-2 px-3 py-2 text-xs font-semibold text-gray-500 border-b bg-gray-50 rounded-t-lg">
             <ArrowLeftRight size={14} className="text-gray-400" />
-            Switch to
+            Switch Store to
           </div>
 
           {/* Store Options */}

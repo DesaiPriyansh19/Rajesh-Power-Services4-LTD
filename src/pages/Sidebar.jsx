@@ -12,6 +12,7 @@ import {
   User
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import BranchSelector from "../utils/BranchSelectore";
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
   const location = useLocation();
@@ -89,7 +90,15 @@ const menuItems = [
   { name: "Users", icon: User, type: "link", path: "/users" },
 ];
 
-
+  const user = {
+    name: "Rajesh Kumar",
+    mobile: "9876543210",
+    role: "Admin",
+    store: "Ahmedabad",
+    storeCount: 5,
+    stores:["jodhpur","vejlpur"],
+    img:{},
+  };
   return (
     <div
       ref={scrollRef}
@@ -99,7 +108,8 @@ const menuItems = [
         overflow-y-auto h-full flex flex-col 
         ${isOpen ? "w-64" : "w-20"}`}
     >
-      <ul className="mt-0 pt-8 space-y-2 relative flex-1">
+        <div className="block md:hidden mx-5 mt-2"><BranchSelector stores={user.stores} defaultStore="gota" /></div>
+      <ul className="mt-0 pt-4 space-y-2 relative flex-1">
         {menuItems.map((item, index) => (
           <li key={index} className="relative group">
             {/* Main Item */}
@@ -190,6 +200,7 @@ const menuItems = [
           </li>
         ))}
       </ul>
+    
     </div>
   );
 };

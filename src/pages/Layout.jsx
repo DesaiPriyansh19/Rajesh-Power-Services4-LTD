@@ -28,7 +28,7 @@ const Layout = () => {
 <AnimatePresence>
   {mobileSidebar && (
     <motion.div
-      className="fixed  inset-0 bg-black/20 backdrop-blur-sm z-50 flex"
+      className="fixed md:hidden  inset-0 bg-black/20 backdrop-blur-sm z-50 flex"
       initial="hidden"
       animate="visible"
       exit="hidden"

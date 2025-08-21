@@ -62,12 +62,12 @@ const Header = ({ sidebarOpen, setSidebarOpen, mobileSidebar, setMobileSidebar }
  {/* Right side */}
 <div className="flex items-center gap-4">
       {/* Branch Selector */}
-      <BranchSelector stores={user.stores} defaultStore="gota" />
+     <div className=" hidden md:flex"> <BranchSelector stores={user.stores} defaultStore="gota" /></div> 
   {/* Profile Menu Wrapper */}
   <div className="relative" ref={popupRef}>
   {/* Profile Image Trigger */}
   <div
-    className="w-10 h-10 rounded-full overflow-hidden border border-black cursor-pointer"
+    className=" w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-black cursor-pointer"
     onClick={() => setOpen((prev) => !prev)}
   >
     <img
@@ -77,12 +77,16 @@ const Header = ({ sidebarOpen, setSidebarOpen, mobileSidebar, setMobileSidebar }
     />
   </div>
 
-  {/* Popup Card */}
+<div className="relative">
+  {/* Popup */}
   {open && (
-    <div className="absolute right-0 top-12">
+    <div className="absolute top-2 right-0 sm:right-0 w-64 max-w-[90vw] z-50">
       <UserProfileCard user={user} />
     </div>
   )}
+</div>
+
+
 </div>
 
   {/* Bell Icon */}
@@ -140,7 +144,7 @@ const Header = ({ sidebarOpen, setSidebarOpen, mobileSidebar, setMobileSidebar }
 
   {/* Toggle Menu (Large Devices) */}
   <button
-    className="hidden lg:block p-2 hover:bg-gray-100 rounded transition-colors duration-200"
+    className="hidden md:block p-2 hover:bg-gray-100 rounded transition-colors duration-200"
     onClick={() => setSidebarOpen(!sidebarOpen)}
   >
     {sidebarOpen ? <X size={22} /> : <Menu size={22} />}
@@ -148,7 +152,7 @@ const Header = ({ sidebarOpen, setSidebarOpen, mobileSidebar, setMobileSidebar }
 
   {/* Toggle Menu (Small Devices) */}
   <button
-    className="block lg:hidden p-2 hover:bg-gray-100 rounded transition-colors duration-200"
+    className="block md:hidden p-2 hover:bg-gray-100 rounded transition-colors duration-200"
     onClick={() => setMobileSidebar(true)}
   >
     <Menu size={22} className="text-gray-700" />
