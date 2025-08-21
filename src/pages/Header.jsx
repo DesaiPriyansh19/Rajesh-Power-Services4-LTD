@@ -1,27 +1,41 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Bell, Menu, X } from "lucide-react";
 import logo from "../public/logo.png";
-import defaultProfile from "../public/profile-logo-default.png";
+import defaultProfile from "../public/image.jpeg";
 import { motion, AnimatePresence } from "framer-motion";
 import UserProfileCard from "../popups/UserProfileCard";
 import BranchSelector from "../utils/BranchSelectore";
 const Header = ({ sidebarOpen, setSidebarOpen, mobileSidebar, setMobileSidebar }) => {
   const [showNotifications, setShowNotifications] = useState(false);
   const dropdownRef = useRef(null);
-  const [open, setOpen] = useState(false);
+  const [openProfile, setOpenProfile] = useState(false);
   const popupRef = useRef(null);
 
-  // Close if clicked outside
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (popupRef.current && !popupRef.current.contains(event.target)) {
-        setOpen(false);
+    function handleClickOutside(event) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        profileRef.current &&
+        !profileRef.current.contains(event.target)
+      ) {
+        setShowNotifications(false);
+        setOpenProfile(false);
+      } else if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target)
+      ) {
+        setShowNotifications(false);
+      } else if (
+        profileRef.current &&
+        !profileRef.current.contains(event.target)
+      ) {
+        setOpenProfile(false);
       }
-    };
+    }
+
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   // Sample user data (you can fetch this dynamically)
@@ -34,16 +48,7 @@ const Header = ({ sidebarOpen, setSidebarOpen, mobileSidebar, setMobileSidebar }
     stores:["jodhpur","vejlpur"],
     img:{defaultProfile},
   };
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setShowNotifications(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+
 
   // Example notifications (replace later with real data)
   const notifications = [
@@ -67,8 +72,11 @@ const Header = ({ sidebarOpen, setSidebarOpen, mobileSidebar, setMobileSidebar }
   <div className="relative" ref={popupRef}>
   {/* Profile Image Trigger */}
   <div
-    className=" w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-black cursor-pointer"
-    onClick={() => setOpen((prev) => !prev)}
+    className=" w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden border-[1.5px] border-black cursor-pointer"
+     onClick={() => {
+            setOpenProfile((prev) => !prev);
+            setShowNotifications(false); // close notifications if open
+          }}
   >
     <img
       src={defaultProfile}
@@ -77,21 +85,35 @@ const Header = ({ sidebarOpen, setSidebarOpen, mobileSidebar, setMobileSidebar }
     />
   </div>
 
+
+
 <div className="relative">
   {/* Popup */}
-  {open && (
-    <div className="absolute top-2 right-0 sm:right-0 w-64 max-w-[90vw] z-50">
-      <UserProfileCard user={user} />
-    </div>
-  )}
+  <AnimatePresence>
+    {openProfile && (
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8, transformOrigin: "top right" }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.8 }}
+        transition={{ duration: 0.25, ease: "easeInOut" }}
+        className="absolute top-2 right-0 sm:right-0 w-64 max-w-[90vw] z-50"
+      >
+        <UserProfileCard user={user} image={defaultProfile} />
+      </motion.div>
+    )}
+  </AnimatePresence>
 </div>
+
 
 
 </div>
 
   {/* Bell Icon */}
   <div
-    onClick={() => setShowNotifications(!showNotifications)}
+      onClick={() => {
+            setShowNotifications((prev) => !prev);
+            setOpenProfile(false); // close profile if open
+          }}
     className="relative cursor-pointer"
   >
     <Bell size={22} className="text-gray-700 cursor-pointer" />

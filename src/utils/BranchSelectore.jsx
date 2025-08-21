@@ -23,7 +23,7 @@ export default function BranchSelector({ stores, defaultStore }) {
   };
 
   return (
-    <div className="relative border rounded-md" ref={dropdownRef}>
+    <div className="relative border-[1.5px] border-black rounded-md" ref={dropdownRef}>
       {/* Button */}
       <button
         onClick={() => setOpen(!open)}

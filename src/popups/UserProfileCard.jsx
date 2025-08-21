@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom"; // ✅ Correct import
 
-export default function UserProfileCard({ user }) {
+export default function UserProfileCard({ user, image }) {
   return (
     <div
       className="w-80 bg-white shadow-xl rounded-2xl p-6 border 
@@ -20,15 +20,14 @@ export default function UserProfileCard({ user }) {
       <div className="flex items-center gap-4 mb-5">
         <div className="relative">
           <img
-            src={user.avatar}
+            src={image}
             alt="Profile"
-            className="w-14 h-14 rounded-full border-2 border-blue-500 shadow-md object-cover"
+            className="w-14 h-14 rounded-full border-2 border-black shadow-md object-cover"
           />
           <span className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white rounded-full"></span>
         </div>
         <div>
           <h3 className="font-semibold text-lg text-gray-800 flex items-center gap-1">
-            <UserCircle size={18} className="text-gray-500" />
             {user.name}
           </h3>
           <p className="text-sm text-gray-500">{user.role}</p>
