@@ -21,6 +21,7 @@ import UserProfile from "./pages/UserProfile";
 import ProjectDetails from "./pages/ProjectDetails";
 import Challan from "./pages/manage goods/Challan";
 import GRN from "./pages/manage goods/GRN";
+import { RefreshProvider } from "./context/RefreshContext";
 
 // Create a wrapper component that uses location to support AnimatePresence
 function AnimatedRoutes() {
@@ -28,6 +29,7 @@ function AnimatedRoutes() {
 
   return (
     <AnimatePresence exitBeforeEnter>
+       <RefreshProvider>
       <Routes location={location} key={location.pathname}>
         {/* Login page (no layout) */}
         <Route
@@ -187,7 +189,9 @@ function AnimatedRoutes() {
           />
         </Route>
       </Routes>
+      </RefreshProvider>
     </AnimatePresence>
+    
   );
 }
 

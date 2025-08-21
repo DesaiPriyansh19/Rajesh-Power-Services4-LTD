@@ -30,7 +30,7 @@ function ProjectDetails() {
 
   return (
     <>
- <div className="bg-white flex flex-col lg:flex-row gap-2 justify-center items-start shadow-md rounded-md px-3 sm:px-5 py-4">
+ <div className="bg-white flex flex-col lg:flex-row gap-2 lg:gap-10 justify-center items-start shadow-md rounded-md px-3 sm:px-5 py-4">
   {/* LEFT SIDE: Project Info */}
   <div className="w-full lg:w-[20%] px-3 bg-black rounded-md p-3 text-white mb-4 lg:mb-0">
     <h1 className="text-2xl sm:text-3xl font-bold mb-4">PROJECT- 856</h1>

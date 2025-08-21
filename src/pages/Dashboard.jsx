@@ -1,8 +1,11 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useRefresh } from "../context/RefreshContext";
+
 
 export default function Dashboard() {
+   const { refreshKey } = useRefresh();
   const cards = [
     { title: "TODAY’S DISPATCH CLEARANCE", value: 19, link: "/clearance1" },
     { title: "TODAY’S DISPATCH CLEARANCE", value: 25, link: "/clearance1" },
@@ -28,7 +31,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="p-6 space-y-8 bg-white rounded-lg box-shadow-1">
+    <div className="p-6 space-y-8 bg-white rounded-lg box-shadow-1" key={refreshKey}>
       {/* --- FIRST SECTION: 4 Cards --- */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {cards.map((card, index) => (

@@ -5,12 +5,34 @@ import defaultProfile from "../public/image.jpeg";
 import { motion, AnimatePresence } from "framer-motion";
 import UserProfileCard from "../popups/UserProfileCard";
 import BranchSelector from "../utils/BranchSelectore";
+import { Maximize2, Minimize2 } from "lucide-react"; // icons
+import { RotateCcw } from "lucide-react"; // refresh icon
+import { useRefresh } from "../context/RefreshContext";
 const Header = ({ sidebarOpen, setSidebarOpen, mobileSidebar, setMobileSidebar }) => {
   const [showNotifications, setShowNotifications] = useState(false);
   const dropdownRef = useRef(null);
   const [openProfile, setOpenProfile] = useState(false);
   const popupRef = useRef(null);
-
+ const [isFullscreen, setIsFullscreen] = useState(false);
+   const [isRefreshing, setIsRefreshing] = useState(false);
+  const { refresh } = useRefresh();
+  const [spinId, setSpinId] = useState(0);
+ 
+   const handleRefresh = () => {
+   refresh();                // 🔄 refresh keyed components
+    setSpinId((n) => n + 1);  // ▶️ retrigger spin animation
+  };
+  const toggleFullScreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+      setIsFullscreen(true);
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+        setIsFullscreen(false);
+      }
+    }
+  };
   useEffect(() => {
     function handleClickOutside(event) {
       if (
@@ -66,6 +88,39 @@ const Header = ({ sidebarOpen, setSidebarOpen, mobileSidebar, setMobileSidebar }
 
  {/* Right side */}
 <div className="flex items-center gap-4">
+  {/* refresh btn */}
+  <button
+      onClick={handleRefresh}
+      className="p-2 rounded-md text-black hover:bg-gray-100"
+      aria-label="Refresh"
+    >
+      <motion.span
+        key={spinId}
+        initial={{ rotate: 0 }}
+        animate={{ rotate: 712 }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
+        className="inline-flex"
+      >
+        <RotateCcw size={20} />
+      </motion.span>
+    </button>
+  {/* Fullscreen Button */}
+      <button
+        onClick={toggleFullScreen}
+        className="p-1 sm:p-2 rounded-md border-[1.5px] border-black  text-back hover:bg-gray-100 transition flex items-center gap-2"
+      >
+        {isFullscreen ? (
+          <>
+            <Minimize2 size={18} />
+            
+          </>
+        ) : (
+          <>
+            <Maximize2 size={18} />
+            
+          </>
+        )}
+      </button>
       {/* Branch Selector */}
      <div className=" hidden md:flex"> <BranchSelector stores={user.stores} defaultStore="gota" /></div> 
   {/* Profile Menu Wrapper */}
