@@ -61,8 +61,10 @@ const Layout = () => {
     </motion.div>
   )}
 </AnimatePresence>
+
+
         {/* Page content */}
-        <main className="flex-1 pl-4 pt-4 pb-4 overflow-y-auto">
+        <main className="flex-1 pl-4 pt-0  pb-4 overflow-y-auto">
           <Outlet />
         </main>
       </div>
