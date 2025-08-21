@@ -108,7 +108,7 @@ const menuItems = [
         overflow-y-auto h-full flex flex-col 
         ${isOpen ? "w-64" : "w-20"}`}
     >
-        <div className="block md:hidden mx-5 mt-2"><BranchSelector stores={user.stores} defaultStore="gota" /></div>
+        <div className="block md:hidden mx-5 mt-7"><BranchSelector stores={user.stores} defaultStore="gota" /></div>
       <ul className="mt-0 pt-4 space-y-2 relative flex-1">
         {menuItems.map((item, index) => (
           <li key={index} className="relative group">
