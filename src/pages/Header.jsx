@@ -91,7 +91,7 @@ const Header = ({ sidebarOpen, setSidebarOpen, mobileSidebar, setMobileSidebar }
   {/* refresh btn */}
   <button
       onClick={handleRefresh}
-      className="p-2 rounded-md text-black hover:bg-gray-100"
+      className="hidden  md:flex p-2 rounded-md text-black hover:bg-gray-100"
       aria-label="Refresh"
     >
       <motion.span
@@ -107,7 +107,7 @@ const Header = ({ sidebarOpen, setSidebarOpen, mobileSidebar, setMobileSidebar }
   {/* Fullscreen Button */}
       <button
         onClick={toggleFullScreen}
-        className="p-1 sm:p-2 rounded-md border-[1.5px] border-black  text-back hover:bg-gray-100 transition flex items-center gap-2"
+        className=" hidden  md:flex p-1 sm:p-2 rounded-md border-[1.5px] border-black  text-back hover:bg-gray-100 transition items-center gap-2"
       >
         {isFullscreen ? (
           <>
